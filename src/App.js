@@ -6,6 +6,7 @@ import MetiersTransformation from './pages/MetiersTransformation';
 import BenchmarksEconomiques from './pages/BenchmarksEconomiques';
 import StrategieAdaptation from './pages/StrategieAdaptation';
 import Methodologie from './pages/Methodologie';
+import TempsEconomise from './pages/TempsEconomise';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="benchmarks-economiques" element={<BenchmarksEconomiques />} />
         <Route path="strategie-adaptation" element={<StrategieAdaptation />} />
         <Route path="methodologie" element={<Methodologie />} />
+        <Route path="temps-economise" element={<TempsEconomise />} />
       </Route>
     </Routes>
   );

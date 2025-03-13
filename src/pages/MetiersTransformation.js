@@ -20,6 +20,28 @@ const MetiersTransformation = () => {
     setSelectedMetier(metier);
   };
 
+  // Format personnalisé pour afficher les valeurs avec un seul chiffre après la virgule
+  const formatNumber = (value) => {
+    return value.toFixed(1);
+  };
+
+  // Format personnalisé pour l'infobulle du graphique
+  const customTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 shadow-md rounded-md border border-gray-200">
+          <p className="font-bold text-gray-700">{label}</p>
+          <p className="text-blue-600">ETP avant IA: {formatNumber(payload[0].value)}</p>
+          <p className="text-green-600">ETP après IA: {formatNumber(payload[1].value)}</p>
+          <p className="text-gray-700 font-bold">
+            Réduction: {metiersData.etpComparaison.find(item => item.name === label)?.reduction}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col space-y-2">
@@ -32,12 +54,25 @@ const MetiersTransformation = () => {
 
       {/* Graphique de comparaison ETP */}
       <InfoCard title="Évolution des ETP par métier">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={metiersData.etpComparaison} layout="vertical">
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart 
+            data={metiersData.etpComparaison} 
+            layout="vertical"
+            margin={{ left: 120, right: 30, top: 20, bottom: 20 }}
+          >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 7]} />
-            <YAxis dataKey="name" type="category" />
-            <Tooltip />
+            <XAxis 
+              type="number" 
+              domain={[0, 7]} 
+              tickFormatter={formatNumber}
+            />
+            <YAxis 
+              dataKey="name" 
+              type="category" 
+              width={100}
+              tick={{ fontSize: 14 }}
+            />
+            <Tooltip content={customTooltip} />
             <Legend />
             <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8" />
             <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d" />

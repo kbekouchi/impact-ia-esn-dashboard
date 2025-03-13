@@ -127,6 +127,26 @@ const Dashboard = () => {
         </InfoCard>
       </div>
 
+      {/* Productivité IA vs humain */}
+      <InfoCard title="Productivité IA vs Développement humain" bgColor="indigo">
+        <div className="flex justify-between items-start">
+          <div className="pr-4">
+            <p className="mb-4 text-gray-600">
+              Découvrez une démonstration concrète du potentiel de transformation de l'IA : cette application 
+              elle-même a été développée en quelques heures avec l'IA, alors qu'un développement humain 
+              traditionnel aurait nécessité environ 38-40 jours de travail.
+            </p>
+            <p className="text-gray-600">
+              Une analyse comparative détaillée montre un facteur d'accélération d'environ 80x, 
+              avec une visualisation phase par phase des économies de temps réalisées.
+            </p>
+          </div>
+          <Link to="/temps-economise" className="btn-primary whitespace-nowrap">
+            Voir la comparaison
+          </Link>
+        </div>
+      </InfoCard>
+
       {/* Méthodologie */}
       <InfoCard title="Méthodologie et Sources" bgColor="gray">
         <div className="flex justify-between items-start">

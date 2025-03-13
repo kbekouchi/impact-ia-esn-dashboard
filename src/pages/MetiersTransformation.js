@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
 import { metiersData, tendancesTransversales } from '../data/metiersData';
@@ -20,6 +20,28 @@ const MetiersTransformation = () => {
     setSelectedMetier(metier);
   };
 
+  // Format personnalisé pour afficher les valeurs avec un seul chiffre après la virgule
+  const formatNumber = (value) => {
+    return value.toFixed(1);
+  };
+
+  // Format personnalisé pour l'infobulle du graphique
+  const customTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 shadow-md rounded-md border border-gray-200">
+          <p className="font-bold text-gray-700">{label}</p>
+          <p className="text-blue-600">ETP avant IA: {formatNumber(payload[0].value)}</p>
+          <p className="text-green-600">ETP après IA: {formatNumber(payload[1].value)}</p>
+          <p className="text-gray-700 font-bold">
+            Réduction: {metiersData.etpComparaison.find(item => item.name === label)?.reduction}
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col space-y-2">
@@ -32,15 +54,34 @@ const MetiersTransformation = () => {
 
       {/* Graphique de comparaison ETP */}
       <InfoCard title="Évolution des ETP par métier">
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={metiersData.etpComparaison} layout="vertical">
+        <ResponsiveContainer width="100%" height={450}>
+          <BarChart 
+            data={metiersData.etpComparaison} 
+            layout="vertical"
+            margin={{ left: 200, right: 40, top: 30, bottom: 30 }}
+          >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 7]} />
-            <YAxis dataKey="name" type="category" />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8" />
-            <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d" />
+            <XAxis 
+              type="number" 
+              domain={[0, 7]} 
+              tickFormatter={formatNumber}
+              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15 }}
+            />
+            <YAxis 
+              dataKey="name" 
+              type="category" 
+              width={180}
+              tick={{ fontSize: 16, fontWeight: 'bold' }}
+              tickMargin={10}
+            />
+            <Tooltip content={customTooltip} />
+            <Legend wrapperStyle={{ paddingTop: 20 }} />
+            <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
+              <LabelList dataKey="avant" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+            </Bar>
+            <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
+              <LabelList dataKey="apres" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </InfoCard>

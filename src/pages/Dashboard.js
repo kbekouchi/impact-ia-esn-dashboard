@@ -126,6 +126,26 @@ const Dashboard = () => {
           </Link>
         </InfoCard>
       </div>
+
+      {/* Méthodologie */}
+      <InfoCard title="Méthodologie et Sources" bgColor="gray">
+        <div className="flex justify-between items-start">
+          <div className="pr-4">
+            <p className="mb-4 text-gray-600">
+              Cette étude s'appuie sur des sources reconnues issues de cabinets de conseil et d'études sectorielles 
+              (McKinsey, Gartner, WEF, BCG) et intègre les dernières données disponibles sur l'impact de l'IA 
+              sur le secteur des services numériques.
+            </p>
+            <p className="text-gray-600">
+              Notre approche méthodologique combine une analyse quantitative des impacts sur les effectifs et la 
+              productivité avec une analyse qualitative des transformations des métiers et des modèles d'affaires.
+            </p>
+          </div>
+          <Link to="/methodologie" className="btn-primary whitespace-nowrap">
+            Consulter les sources
+          </Link>
+        </div>
+      </InfoCard>
     </div>
   );
 };

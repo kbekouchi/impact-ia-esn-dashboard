@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import MetiersTransformation from './pages/MetiersTransformation';
 import BenchmarksEconomiques from './pages/BenchmarksEconomiques';
 import StrategieAdaptation from './pages/StrategieAdaptation';
+import Methodologie from './pages/Methodologie';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="metiers-transformation" element={<MetiersTransformation />} />
         <Route path="benchmarks-economiques" element={<BenchmarksEconomiques />} />
         <Route path="strategie-adaptation" element={<StrategieAdaptation />} />
+        <Route path="methodologie" element={<Methodologie />} />
       </Route>
     </Routes>
   );

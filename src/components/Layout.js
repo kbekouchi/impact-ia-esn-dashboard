@@ -5,6 +5,7 @@ import {
   FaUsers, 
   FaChartBar, 
   FaCog,
+  FaBook
 } from 'react-icons/fa';
 
 const Layout = () => {
@@ -61,6 +62,17 @@ const Layout = () => {
               >
                 <FaCog className="text-lg" />
                 <span>Stratégie d'adaptation</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+                to="/methodologie" 
+                className={({isActive}) => 
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+              >
+                <FaBook className="text-lg" />
+                <span>Méthodologie et Sources</span>
               </NavLink>
             </li>
           </ul>

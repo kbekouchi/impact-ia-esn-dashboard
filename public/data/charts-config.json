@@ -1,0 +1,133 @@
+{
+  "colors": {
+    "primary": ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"],
+    "blue": ["#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8"],
+    "green": ["#bbf7d0", "#86efac", "#4ade80", "#22c55e", "#16a34a", "#15803d"],
+    "red": ["#fecaca", "#fca5a5", "#f87171", "#ef4444", "#dc2626", "#b91c1c"],
+    "purple": ["#e9d5ff", "#d8b4fe", "#c084fc", "#a855f7", "#9333ea", "#7e22ce"],
+    "amber": ["#fef3c7", "#fde68a", "#fcd34d", "#fbbf24", "#f59e0b", "#d97706"],
+    "gray": ["#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563"]
+  },
+  "etpComparisonChart": {
+    "layout": "vertical",
+    "height": 480,
+    "margin": {
+      "top": 10,
+      "right": 30,
+      "bottom": 10,
+      "left": 0
+    },
+    "domain": [0, 7],
+    "yAxisWidth": 105,
+    "stroke": "3 3",
+    "bars": [
+      {
+        "dataKey": "avant",
+        "name": "ETP avant IA",
+        "fill": "#8884d8",
+        "labelPosition": "right"
+      },
+      {
+        "dataKey": "apres",
+        "name": "ETP après IA",
+        "fill": "#82ca9d",
+        "labelPosition": "right"
+      }
+    ]
+  },
+  "budgetChart": {
+    "height": 480,
+    "margin": {
+      "top": 10,
+      "right": 5,
+      "bottom": 10,
+      "left": 0
+    },
+    "domain": [0, 40],
+    "stroke": "3 3",
+    "legendHeight": 25,
+    "bars": [
+      {
+        "dataKey": "avant",
+        "name": "Avant IA (%)",
+        "fill": "#8884d8"
+      },
+      {
+        "dataKey": "apres",
+        "name": "Après IA (%)",
+        "fill": "#82ca9d"
+      }
+    ]
+  },
+  "productivityChart": {
+    "height": 400,
+    "margin": {
+      "top": 10,
+      "right": 30,
+      "bottom": 30,
+      "left": 10
+    },
+    "domain": [0, 100],
+    "stroke": "3 3",
+    "lines": [
+      {
+        "dataKey": "avant",
+        "name": "Productivité avant IA",
+        "stroke": "#8884d8",
+        "strokeWidth": 2
+      },
+      {
+        "dataKey": "apres",
+        "name": "Productivité avec IA",
+        "stroke": "#82ca9d",
+        "strokeWidth": 2
+      }
+    ]
+  },
+  "impactChart": {
+    "height": 350,
+    "margin": {
+      "top": 5,
+      "right": 30,
+      "bottom": 5,
+      "left": 20
+    },
+    "domain": [0, 100],
+    "stroke": "3 3",
+    "barSize": 20,
+    "bars": [
+      {
+        "dataKey": "automatisation",
+        "name": "Automatisation (%)",
+        "fill": "#8884d8"
+      },
+      {
+        "dataKey": "augmentation",
+        "name": "Augmentation (%)",
+        "fill": "#82ca9d"
+      }
+    ]
+  },
+  "pieChartConfig": {
+    "height": 300,
+    "innerRadius": 60,
+    "outerRadius": 80,
+    "paddingAngle": 5,
+    "nameKey": "name",
+    "dataKey": "value",
+    "labelLine": true
+  },
+  "tooltipStyles": {
+    "backgroundColor": "white",
+    "padding": "0.75rem",
+    "borderRadius": "0.375rem",
+    "boxShadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    "border": "1px solid #e5e7eb"
+  },
+  "fontSizes": {
+    "axis": 12,
+    "label": 12,
+    "title": 14,
+    "legend": 12
+  }
+}

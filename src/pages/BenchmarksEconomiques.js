@@ -1,18 +1,101 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
-// Importation du service de données au lieu des données directement
+// Importation du service de données
 import { getBudgetData, getInvestissementsData, getStrategiesEsn } from '../services/dataService';
 
+// Composant de chargement
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center py-12">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+  </div>
+);
+
+// Composant d'erreur
+const ErrorMessage = ({ onRetry }) => (
+  <div className="flex flex-col items-center py-8 text-center">
+    <p className="text-red-600 font-semibold mb-4">Une erreur est survenue lors du chargement des données.</p>
+    <button 
+      onClick={onRetry} 
+      className="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded"
+    >
+      Réessayer
+    </button>
+  </div>
+);
+
 const BenchmarksEconomiques = () => {
-  // Récupération des données via le service
-  const budgetData = getBudgetData();
-  const investissementsData = getInvestissementsData();
-  const strategiesData = getStrategiesEsn();
-  const { impactEconomique, strategiesLeaders } = strategiesData;
+  // États pour gérer les données, le chargement et les erreurs
+  const [budgetData, setBudgetData] = useState([]);
+  const [investissementsData, setInvestissementsData] = useState([]);
+  const [strategiesData, setStrategiesData] = useState({ impactEconomique: { reductionCouts: [], attentesClients: [] }, strategiesLeaders: [] });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  
+  // Fonction pour charger les données
+  const loadData = async () => {
+    setLoading(true);
+    setError(false);
+    
+    try {
+      // Charger les données de façon asynchrone
+      const budgetDataRes = await getBudgetData();
+      const investissementsDataRes = await getInvestissementsData();
+      const strategiesDataRes = await getStrategiesEsn();
+      
+      setBudgetData(budgetDataRes);
+      setInvestissementsData(investissementsDataRes);
+      setStrategiesData(strategiesDataRes);
+      setLoading(false);
+    } catch (error) {
+      console.error("Erreur lors du chargement des données:", error);
+      setError(true);
+      setLoading(false);
+    }
+  };
+  
+  // Charger les données au montage du composant
+  useEffect(() => {
+    loadData();
+  }, []);
   
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+
+  // Extraire les données de l'objet strategiesData
+  const { impactEconomique, strategiesLeaders } = strategiesData;
+
+  // Afficher le spinner de chargement si les données sont en cours de chargement
+  if (loading) {
+    return (
+      <div className="space-y-8">
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">Benchmarks économiques</h1>
+          <p className="text-gray-600 max-w-3xl">
+            Analyse comparative des stratégies des ESN leaders face à l'IA et de l'évolution des 
+            budgets IT des clients. Projections économiques pour les années à venir.
+          </p>
+        </div>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  // Afficher un message d'erreur si le chargement a échoué
+  if (error) {
+    return (
+      <div className="space-y-8">
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">Benchmarks économiques</h1>
+          <p className="text-gray-600 max-w-3xl">
+            Analyse comparative des stratégies des ESN leaders face à l'IA et de l'évolution des 
+            budgets IT des clients. Projections économiques pour les années à venir.
+          </p>
+        </div>
+        <ErrorMessage onRetry={loadData} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import StatCard from '../components/StatCard';
 import InfoCard from '../components/InfoCard';
-import { metiersData } from '../data/metiersData';
-import { budgetData, investissementsData } from '../data/benchmarksData';
+// Importation du service de données au lieu des données directement
+import { getMetiersEtpComparaison, getBudgetData } from '../services/dataService';
 
 const Dashboard = () => {
+  // Récupération des données via le service
+  const etpComparaison = getMetiersEtpComparaison();
+  const budgetData = getBudgetData();
+  
   // Moyenne des réductions d'effectifs
   const avgReduction = Math.round((60 + 60 + 70) / 3); // Moyenne des 3 métiers avec réduction
 
@@ -24,7 +28,7 @@ const Dashboard = () => {
           <p className="text-blue-600">ETP avant IA: {formatNumber(payload[0].value)}</p>
           <p className="text-green-600">ETP après IA: {formatNumber(payload[1].value)}</p>
           <p className="text-gray-700 font-bold">
-            Réduction: {metiersData.etpComparaison.find(item => item.name === label)?.reduction}
+            Réduction: {etpComparaison.find(item => item.name === label)?.reduction}
           </p>
         </div>
       );
@@ -77,7 +81,7 @@ const Dashboard = () => {
           <div style={{ height: '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
-                data={metiersData.etpComparaison} 
+                data={etpComparaison} 
                 layout="vertical"
                 margin={{ left: 0, right: 30, top: 10, bottom: 10 }}
               >

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
-// Importation du service de données au lieu des données directement
+// Importation du service de données
 import {
   getMetiersEtpComparaison,
   getDeveloppeurData,
@@ -12,29 +12,77 @@ import {
   getTendancesTransversales
 } from '../services/dataService';
 
+// Composant de chargement
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center py-12">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+  </div>
+);
+
+// Composant d'erreur
+const ErrorMessage = ({ onRetry }) => (
+  <div className="flex flex-col items-center py-8 text-center">
+    <p className="text-red-600 font-semibold mb-4">Une erreur est survenue lors du chargement des données.</p>
+    <button 
+      onClick={onRetry} 
+      className="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded"
+    >
+      Réessayer
+    </button>
+  </div>
+);
+
 const MetiersTransformation = () => {
   const [selectedMetier, setSelectedMetier] = useState('developpeur');
   
-  // Récupération des données via le service
-  const etpComparaison = getMetiersEtpComparaison();
-  const metiersDetails = {
-    developpeur: getDeveloppeurData(),
-    businessAnalyst: getBusinessAnalystData(),
-    architecte: getArchitecteData(),
-    testeur: getTesteurData()
-  };
-  const tendancesTransversales = getTendancesTransversales();
+  // États pour gérer les données, le chargement et les erreurs
+  const [etpComparaison, setEtpComparaison] = useState([]);
+  const [metiersDetails, setMetiersDetails] = useState({
+    developpeur: null,
+    businessAnalyst: null,
+    architecte: null,
+    testeur: null
+  });
+  const [tendancesTransversales, setTendancesTransversales] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   
-  const metierInfo = metiersDetails[selectedMetier];
-
-  // Données pour les courbes
-  const colors = {
-    developpeur: 'blue',
-    businessAnalyst: 'purple',
-    architecte: 'green',
-    testeur: 'red'
+  // Fonction pour charger les données
+  const loadData = async () => {
+    setLoading(true);
+    setError(false);
+    
+    try {
+      // Charger les données de façon asynchrone
+      const etpData = await getMetiersEtpComparaison();
+      const developpeurData = await getDeveloppeurData();
+      const businessAnalystData = await getBusinessAnalystData();
+      const architecteData = await getArchitecteData();
+      const testeurData = await getTesteurData();
+      const tendancesData = await getTendancesTransversales();
+      
+      setEtpComparaison(etpData);
+      setMetiersDetails({
+        developpeur: developpeurData,
+        businessAnalyst: businessAnalystData,
+        architecte: architecteData,
+        testeur: testeurData
+      });
+      setTendancesTransversales(tendancesData);
+      setLoading(false);
+    } catch (error) {
+      console.error("Erreur lors du chargement des données:", error);
+      setError(true);
+      setLoading(false);
+    }
   };
-
+  
+  // Charger les données au montage du composant
+  useEffect(() => {
+    loadData();
+  }, []);
+  
+  // Sélection du métier actif
   const handleMetierChange = (metier) => {
     setSelectedMetier(metier);
   };
@@ -61,6 +109,48 @@ const MetiersTransformation = () => {
     return null;
   };
 
+  // Données pour les courbes
+  const colors = {
+    developpeur: 'blue',
+    businessAnalyst: 'purple',
+    architecte: 'green',
+    testeur: 'red'
+  };
+
+  // Afficher le spinner de chargement si les données sont en cours de chargement
+  if (loading) {
+    return (
+      <div className="space-y-8">
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">Transformation des métiers par l'IA</h1>
+          <p className="text-gray-600 max-w-3xl">
+            Analyse détaillée de l'impact de l'IA sur les métiers clés des ESN, avec comparaison 
+            des ETP avant/après et projections futures.
+          </p>
+        </div>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  // Afficher un message d'erreur si le chargement a échoué
+  if (error) {
+    return (
+      <div className="space-y-8">
+        <div className="flex flex-col space-y-2">
+          <h1 className="text-3xl font-bold text-gray-800">Transformation des métiers par l'IA</h1>
+          <p className="text-gray-600 max-w-3xl">
+            Analyse détaillée de l'impact de l'IA sur les métiers clés des ESN, avec comparaison 
+            des ETP avant/après et projections futures.
+          </p>
+        </div>
+        <ErrorMessage onRetry={loadData} />
+      </div>
+    );
+  }
+
+  const metierInfo = metiersDetails[selectedMetier];
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col space-y-2">
@@ -71,7 +161,7 @@ const MetiersTransformation = () => {
         </p>
       </div>
 
-      {/* Graphique de comparaison ETP */}
+      {/* Graphique de comparaison ETP - Solution robuste pour l'issue #11 */}
       <InfoCard title="Évolution des ETP par métier">
         <ResponsiveContainer width="100%" height={450}>
           <BarChart 
@@ -84,7 +174,7 @@ const MetiersTransformation = () => {
               type="number" 
               domain={[0, 7]} 
               tickFormatter={formatNumber}
-              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15 }}
+              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15, fontSize: 16, fontWeight: 'bold' }}
             />
             <YAxis 
               dataKey="name" 
@@ -94,12 +184,26 @@ const MetiersTransformation = () => {
               tickMargin={10}
             />
             <Tooltip content={customTooltip} />
-            <Legend wrapperStyle={{ paddingTop: 20 }} />
+            <Legend 
+              wrapperStyle={{ paddingTop: 20 }}
+              verticalAlign="bottom"
+              align="center"
+            />
             <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
-              <LabelList dataKey="avant" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+              <LabelList 
+                dataKey="avant" 
+                position="right" 
+                formatter={formatNumber} 
+                style={{ fontWeight: 'bold' }} 
+              />
             </Bar>
             <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
-              <LabelList dataKey="apres" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+              <LabelList 
+                dataKey="apres" 
+                position="right" 
+                formatter={formatNumber} 
+                style={{ fontWeight: 'bold' }} 
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

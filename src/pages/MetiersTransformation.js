@@ -71,7 +71,7 @@ const MetiersTransformation = () => {
         </p>
       </div>
 
-      {/* Graphique de comparaison ETP */}
+      {/* Graphique de comparaison ETP - Modifications apportées pour résoudre l'issue #11 */}
       <InfoCard title="Évolution des ETP par métier">
         <ResponsiveContainer width="100%" height={450}>
           <BarChart 
@@ -84,7 +84,7 @@ const MetiersTransformation = () => {
               type="number" 
               domain={[0, 7]} 
               tickFormatter={formatNumber}
-              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15 }}
+              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15, fontSize: 14, fontWeight: 'bold' }}
             />
             <YAxis 
               dataKey="name" 

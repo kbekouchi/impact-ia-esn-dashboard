@@ -1,0 +1,7 @@
+[
+  { "name": "IA", "avant": 5, "apres": 12 },
+  { "name": "Cybersécurité", "avant": 15, "apres": 18 },
+  { "name": "Cloud", "avant": 20, "apres": 25 },
+  { "name": "Dev traditionnel", "avant": 35, "apres": 20 },
+  { "name": "Maintenance", "avant": 25, "apres": 15 }
+]

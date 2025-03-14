@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import StatCard from '../components/StatCard';
 import InfoCard from '../components/InfoCard';
+import StateDisplay from '../components/StateDisplay';
 import { getUiTexts, getDashboardData, getChartsConfig } from '../services/dataService';
-import { FaExclamationTriangle } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [data, setData] = useState({
@@ -99,35 +99,13 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  // Rendu pendant le chargement
+  // Rendu pendant le chargement ou en cas d'erreur avec le nouveau composant StateDisplay
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p>Chargement du dashboard...</p>
-        </div>
-      </div>
-    );
+    return <StateDisplay state="loading" />;
   }
 
-  // Rendu en cas d'erreur
   if (error) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center text-red-600">
-          <FaExclamationTriangle className="text-4xl mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Erreur de chargement</h2>
-          <p>Impossible de charger les données du dashboard.</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Réessayer
-          </button>
-        </div>
-      </div>
-    );
+    return <StateDisplay state="error" onAction={() => window.location.reload()} />;
   }
 
   // Préparer les valeurs des StatCards
@@ -138,6 +116,13 @@ const Dashboard = () => {
     description: texts.components.statCards?.[`${key}Description`] || stat.description,
     color: stat.color
   }));
+
+  // Vérifier si les données essentielles sont vides
+  const isDataEmpty = data.etpComparaison.length === 0 && data.budgetData.length === 0;
+  
+  if (isDataEmpty) {
+    return <StateDisplay state="empty" />;
+  }
 
   return (
     <div className="space-y-8">
@@ -164,91 +149,99 @@ const Dashboard = () => {
       {/* Graphiques principaux */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <InfoCard title={texts.components.charts.etpTitle}>
-          <div style={{ height: chartsConfig.etpComparisonChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart 
-                data={data.etpComparaison} 
-                layout={chartsConfig.etpComparisonChart?.layout || "vertical"}
-                margin={{ 
-                  left: 0, 
-                  right: 30, 
-                  top: 10, 
-                  bottom: 10,
-                  ...chartsConfig.etpComparisonChart?.margin 
-                }}
-              >
-                <CartesianGrid strokeDasharray={chartsConfig.etpComparisonChart?.stroke || "3 3"} />
-                <XAxis 
-                  type="number" 
-                  domain={chartsConfig.etpComparisonChart?.domain || [0, 7]} 
-                  tickFormatter={formatNumber}
-                  fontSize={12}
-                />
-                <YAxis 
-                  dataKey="name" 
-                  type="category" 
-                  width={chartsConfig.etpComparisonChart?.yAxisWidth || 105}
-                  tick={{ fontSize: 12, fontWeight: 'bold' }}
-                  tickMargin={5}
-                />
-                <Tooltip content={customTooltipETP} />
-                <Legend 
-                  wrapperStyle={{ paddingTop: 5 }} 
-                  height={25}
-                />
-                <Bar 
-                  dataKey="avant" 
-                  name={texts.components.charts.etpAvant || "ETP avant IA"} 
-                  fill={chartsConfig.etpComparisonChart?.bars?.[0]?.fill || "#8884d8"}
+          {data.etpComparaison.length > 0 ? (
+            <div style={{ height: chartsConfig.etpComparisonChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                  data={data.etpComparaison} 
+                  layout={chartsConfig.etpComparisonChart?.layout || "vertical"}
+                  margin={{ 
+                    left: 0, 
+                    right: 30, 
+                    top: 10, 
+                    bottom: 10,
+                    ...chartsConfig.etpComparisonChart?.margin 
+                  }}
                 >
-                  <LabelList dataKey="avant" position="right" formatter={formatNumber} />
-                </Bar>
-                <Bar 
-                  dataKey="apres" 
-                  name={texts.components.charts.etpApres || "ETP après IA"} 
-                  fill={chartsConfig.etpComparisonChart?.bars?.[1]?.fill || "#82ca9d"}
-                >
-                  <LabelList dataKey="apres" position="right" formatter={formatNumber} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+                  <CartesianGrid strokeDasharray={chartsConfig.etpComparisonChart?.stroke || "3 3"} />
+                  <XAxis 
+                    type="number" 
+                    domain={chartsConfig.etpComparisonChart?.domain || [0, 7]} 
+                    tickFormatter={formatNumber}
+                    fontSize={12}
+                  />
+                  <YAxis 
+                    dataKey="name" 
+                    type="category" 
+                    width={chartsConfig.etpComparisonChart?.yAxisWidth || 105}
+                    tick={{ fontSize: 12, fontWeight: 'bold' }}
+                    tickMargin={5}
+                  />
+                  <Tooltip content={customTooltipETP} />
+                  <Legend 
+                    wrapperStyle={{ paddingTop: 5 }} 
+                    height={25}
+                  />
+                  <Bar 
+                    dataKey="avant" 
+                    name={texts.components.charts.etpAvant || "ETP avant IA"} 
+                    fill={chartsConfig.etpComparisonChart?.bars?.[0]?.fill || "#8884d8"}
+                  >
+                    <LabelList dataKey="avant" position="right" formatter={formatNumber} />
+                  </Bar>
+                  <Bar 
+                    dataKey="apres" 
+                    name={texts.components.charts.etpApres || "ETP après IA"} 
+                    fill={chartsConfig.etpComparisonChart?.bars?.[1]?.fill || "#82ca9d"}
+                  >
+                    <LabelList dataKey="apres" position="right" formatter={formatNumber} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <StateDisplay state="empty" theme="minimal" fullHeight={false} />
+          )}
         </InfoCard>
 
         <InfoCard title={texts.components.charts.budgetsTitle}>
-          <div style={{ height: chartsConfig.budgetChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart 
-                data={data.budgetData}
-                margin={{ 
-                  left: 0, 
-                  right: 5, 
-                  top: 10, 
-                  bottom: 10,
-                  ...chartsConfig.budgetChart?.margin 
-                }}
-              >
-                <CartesianGrid strokeDasharray={chartsConfig.budgetChart?.stroke || "3 3"} />
-                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                <YAxis 
-                  domain={chartsConfig.budgetChart?.domain || [0, 40]} 
-                  tick={{ fontSize: 12 }} 
-                />
-                <Tooltip />
-                <Legend height={chartsConfig.budgetChart?.legendHeight || 25} wrapperStyle={{ paddingTop: 5 }} />
-                <Bar 
-                  dataKey="avant" 
-                  name={texts.components.charts.budgetAvant || "Avant IA (%)"} 
-                  fill={chartsConfig.budgetChart?.bars?.[0]?.fill || "#8884d8"} 
-                />
-                <Bar 
-                  dataKey="apres" 
-                  name={texts.components.charts.budgetApres || "Après IA (%)"} 
-                  fill={chartsConfig.budgetChart?.bars?.[1]?.fill || "#82ca9d"} 
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          {data.budgetData.length > 0 ? (
+            <div style={{ height: chartsConfig.budgetChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                  data={data.budgetData}
+                  margin={{ 
+                    left: 0, 
+                    right: 5, 
+                    top: 10, 
+                    bottom: 10,
+                    ...chartsConfig.budgetChart?.margin 
+                  }}
+                >
+                  <CartesianGrid strokeDasharray={chartsConfig.budgetChart?.stroke || "3 3"} />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                  <YAxis 
+                    domain={chartsConfig.budgetChart?.domain || [0, 40]} 
+                    tick={{ fontSize: 12 }} 
+                  />
+                  <Tooltip />
+                  <Legend height={chartsConfig.budgetChart?.legendHeight || 25} wrapperStyle={{ paddingTop: 5 }} />
+                  <Bar 
+                    dataKey="avant" 
+                    name={texts.components.charts.budgetAvant || "Avant IA (%)"} 
+                    fill={chartsConfig.budgetChart?.bars?.[0]?.fill || "#8884d8"} 
+                  />
+                  <Bar 
+                    dataKey="apres" 
+                    name={texts.components.charts.budgetApres || "Après IA (%)"} 
+                    fill={chartsConfig.budgetChart?.bars?.[1]?.fill || "#82ca9d"} 
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <StateDisplay state="empty" theme="minimal" fullHeight={false} />
+          )}
         </InfoCard>
       </div>
 

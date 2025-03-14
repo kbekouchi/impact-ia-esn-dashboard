@@ -1,0 +1,26 @@
+{
+  "title": "Architecte Applicatif",
+  "description": "Le métier d'architecte est renforcé par l'IA qui permet de couvrir un périmètre plus large tout en renforçant sa dimension stratégique.",
+  "stats": [
+    { "label": "Priorité stratégique", "value": "83% des entreprises" },
+    { "label": "Avant IA", "value": "1 arch./1-2 projets" },
+    { "label": "Après IA", "value": "1 arch./3-4 projets" },
+    { "label": "Extension périmètre", "value": "+200%" },
+    { "label": "Orientation", "value": "Stratégique" }
+  ],
+  "transformations": [
+    "Génération assistée de patterns architecturaux",
+    "Documentation architecturale automatisée",
+    "Analyse d'impact facilitée sur l'architecture globale",
+    "Benchmark automatisé des options techniques",
+    "Veille technologique augmentée par IA",
+    "Position centrale renforcée (83% des entreprises priorité IA)"
+  ],
+  "projections": [
+    "Architecte augmenté évaluant plusieurs options simultanément",
+    "Optimisation continue basée sur les métriques d'utilisation",
+    "Auto-adaptation de l'architecture selon contraintes",
+    "Gouvernance automatisée et détection de dérives",
+    "Focus sur l'innovation et l'alignement business"
+  ]
+}

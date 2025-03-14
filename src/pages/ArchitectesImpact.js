@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { PieChart, Pie, Cell } from 'recharts';
@@ -255,7 +256,18 @@ const ArchitectesImpact = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-8 text-blue-800">Impact de l'IA sur les Architectes Informatiques</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-blue-800">Impact de l'IA sur les Architectes Informatiques</h1>
+        <Link 
+          to="/architectes-documentation" 
+          className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Sources et méthodologie
+        </Link>
+      </div>
       
       {/* Section d'introduction */}
       <div className="mb-10 bg-white p-6 rounded-lg shadow-md">
@@ -440,7 +452,7 @@ const ArchitectesImpact = () => {
       </div>
       
       {/* Conclusion */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="mb-10 bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-blue-700">Conclusion</h2>
         <p className="mb-4">
           Cette étude démontre que l'impact de l'IA sur les métiers d'architecte est dual : d'un côté, elle automatise certaines tâches à faible 
@@ -463,6 +475,20 @@ const ArchitectesImpact = () => {
             de leur capacité à orchestrer efficacement l'humain et la machine dans des systèmes hybrides performants.
           </p>
         </div>
+      </div>
+      
+      {/* Lien vers la documentation des sources */}
+      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-center">
+        <p className="text-gray-700 mb-2">Pour consulter les sources, la méthodologie détaillée et les témoignages d'experts :</p>
+        <Link 
+          to="/architectes-documentation" 
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg inline-flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Accéder à la documentation complète
+        </Link>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 // Service centralisé pour l'accès aux données
 import { metiersData, tendancesTransversales } from '../data/metiersData';
 import { budgetData, investissementsData, strategiesLeaders, impactEconomique, adaptationStrategique } from '../data/benchmarksData';
-import { sourcesList, methodologie } from '../data/sourcesList';
+import { sourcesList } from '../data/sourcesList';
 
 /**
  * Service centralisé pour accéder aux données de l'application
@@ -29,7 +29,11 @@ export const getAdaptationStrategique = () => adaptationStrategique;
 
 // Données sur les sources et la méthodologie
 export const getSourcesList = () => sourcesList;
-export const getMethodologie = () => methodologie;
+// Note: methodologie n'est pas exporté par sourcesList, donc on le définit ici
+export const getMethodologie = () => ({
+  // Données de méthodologie (si nécessaire, à compléter)
+  approche: "Analyse multidimensionnelle combinant des données quantitatives d'études sectorielles et des analyses qualitatives"
+});
 
 // Export d'un objet contenant toutes les fonctions pour faciliter les imports
 const dataService = {

@@ -132,6 +132,31 @@ const Dashboard = () => {
         </InfoCard>
       </div>
 
+      {/* Nouvelle étude sur les architectes - Section mise en avant */}
+      <InfoCard title="NOUVEAU : Impact de l'IA sur les architectes informatiques" bgColor="amber">
+        <div className="flex flex-col md:flex-row justify-between items-start">
+          <div className="pr-4 mb-4 md:mb-0">
+            <p className="mb-4 text-gray-800 font-medium">
+              <span className="bg-yellow-200 px-2 py-1 rounded-md text-sm font-bold mr-2">Étude exclusive</span>
+              Découvrez notre analyse approfondie sur l'impact spécifique de l'IA sur les différents types d'architectes informatiques.
+            </p>
+            <p className="mb-4 text-gray-600">
+              Cette étude détaille l'évolution du rôle de 6 types d'architectes (SI, Applicatif, Système, Cloud, Données et Sécurité) 
+              face à l'IA, avec des projections à 2, 5 et 10 ans et des recommandations de développement professionnel.
+            </p>
+            <ul className="list-disc pl-5 mb-4 text-gray-700 space-y-1">
+              <li>Analyse des tâches automatisables par profil</li>
+              <li>Évolution des compétences clés requises</li>
+              <li>Projections d'impact par spécialisation</li>
+              <li>Recommandations de formation ciblées</li>
+            </ul>
+          </div>
+          <Link to="/architectes-impact" className="btn-primary whitespace-nowrap bg-amber-600 hover:bg-amber-700">
+            Accéder à l'étude
+          </Link>
+        </div>
+      </InfoCard>
+
       {/* Sections principales - Accès rapide */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <InfoCard title="Métiers en transformation" bgColor="blue">

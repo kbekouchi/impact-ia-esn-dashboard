@@ -74,28 +74,32 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <InfoCard title="Impact sur les ETP par métier">
           {/* Augmentons la hauteur pour mieux remplir l'encart */}
-          <div style={{ height: '450px' }} className="w-full">
+          <div style={{ height: '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
                 data={metiersData.etpComparaison} 
                 layout="vertical"
-                margin={{ left: 160, right: 50, top: 20, bottom: 20 }}
+                margin={{ left: 150, right: 30, top: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
                   type="number" 
                   domain={[0, 7]} 
                   tickFormatter={formatNumber}
+                  fontSize={12}
                 />
                 <YAxis 
                   dataKey="name" 
                   type="category" 
-                  width={150}
+                  width={140}
                   tick={{ fontSize: 14, fontWeight: 'bold' }}
                   tickMargin={5}
                 />
                 <Tooltip content={customTooltipETP} />
-                <Legend wrapperStyle={{ paddingTop: 15 }} />
+                <Legend 
+                  wrapperStyle={{ paddingTop: 5 }} 
+                  height={25}
+                />
                 <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
                   <LabelList dataKey="avant" position="right" formatter={formatNumber} />
                 </Bar>
@@ -109,17 +113,17 @@ const Dashboard = () => {
 
         <InfoCard title="Évolution des budgets IT clients">
           {/* Augmentons aussi cette hauteur pour la cohérence */}
-          <div style={{ height: '450px' }} className="w-full">
+          <div style={{ height: '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
                 data={budgetData}
-                margin={{ left: 10, right: 10, top: 20, bottom: 20 }}
+                margin={{ left: 5, right: 5, top: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis domain={[0, 40]} />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                <YAxis domain={[0, 40]} tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Legend />
+                <Legend height={25} wrapperStyle={{ paddingTop: 5 }} />
                 <Bar dataKey="avant" name="Avant IA (%)" fill="#8884d8" />
                 <Bar dataKey="apres" name="Après IA (%)" fill="#82ca9d" />
               </BarChart>

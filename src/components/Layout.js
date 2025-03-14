@@ -6,7 +6,8 @@ import {
   FaChartBar, 
   FaCog,
   FaBook,
-  FaClock
+  FaClock,
+  FaLaptopCode
 } from 'react-icons/fa';
 
 const Layout = () => {
@@ -41,6 +42,17 @@ const Layout = () => {
               >
                 <FaUsers className="text-lg" />
                 <span>Métiers en transformation</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink 
+                to="/architectes-impact" 
+                className={({isActive}) => 
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+              >
+                <FaLaptopCode className="text-lg" />
+                <span>Impact sur les Architectes</span>
               </NavLink>
             </li>
             <li>

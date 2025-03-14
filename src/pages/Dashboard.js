@@ -136,3 +136,56 @@ const Dashboard = () => {
     description: texts.components.statCards?.[`${key}Description`] || stat.description,
     color: stat.color
   }));
+
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold text-gray-800">{texts.pages.dashboard.title}</h1>
+        <p className="text-gray-600 max-w-3xl">
+          {texts.pages.dashboard.description}
+        </p>
+      </div>
+
+      {/* Statistiques clés */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {statCards.map(stat => (
+          <StatCard 
+            key={stat.key}
+            title={stat.title} 
+            value={stat.value} 
+            description={stat.description}
+            color={stat.color}
+          />
+        ))}
+      </div>
+
+      {/* Graphiques principaux */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <InfoCard title={texts.components.charts.etpTitle}>
+          <div style={{ height: chartsConfig.etpComparisonChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={data.etpComparaison} 
+                layout={chartsConfig.etpComparisonChart?.layout || "vertical"}
+                margin={{ 
+                  left: 0, 
+                  right: 30, 
+                  top: 10, 
+                  bottom: 10,
+                  ...chartsConfig.etpComparisonChart?.margin 
+                }}
+              >
+                <CartesianGrid strokeDasharray={chartsConfig.etpComparisonChart?.stroke || "3 3"} />
+                <XAxis 
+                  type="number" 
+                  domain={chartsConfig.etpComparisonChart?.domain || [0, 7]} 
+                  tickFormatter={formatNumber}
+                  fontSize={12}
+                />
+                <YAxis 
+                  dataKey="name" 
+                  type="category" 
+                  width={chartsConfig.etpComparisonChart?.yAxisWidth || 105}
+                  tick={{ fontSize: 12, fontWeight: 'bold' }}
+                  tickMargin={5}
+                />

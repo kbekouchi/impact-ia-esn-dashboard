@@ -2,9 +2,16 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
-import { budgetData, investissementsData, impactEconomique, strategiesLeaders } from '../data/benchmarksData';
+// Importation du service de données au lieu des données directement
+import { getBudgetData, getInvestissementsData, getStrategiesEsn } from '../services/dataService';
 
 const BenchmarksEconomiques = () => {
+  // Récupération des données via le service
+  const budgetData = getBudgetData();
+  const investissementsData = getInvestissementsData();
+  const strategiesData = getStrategiesEsn();
+  const { impactEconomique, strategiesLeaders } = strategiesData;
+  
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
   return (

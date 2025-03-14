@@ -15,7 +15,8 @@ const Dashboard = () => {
       requalification: { value: 80, unit: '%', description: 'Effectifs à requalifier d\'ici 2027', color: 'purple' }
     },
     etpComparaison: [],
-    budgetData: []
+    budgetData: [],
+    highlightedContent: {}
   });
   
   const [texts, setTexts] = useState({
@@ -249,3 +250,36 @@ const Dashboard = () => {
           </div>
         </InfoCard>
       </div>
+
+      {/* Nouvelle étude sur les architectes - Section mise en avant */}
+      {data.highlightedContent?.architectesStudy && (
+        <InfoCard 
+          title={data.highlightedContent.architectesStudy.title} 
+          bgColor={data.highlightedContent.architectesStudy.bgColor || "amber"}
+        >
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            <div className="pr-4 mb-4 md:mb-0">
+              <p className="mb-4 text-gray-800 font-medium">
+                <span className="bg-yellow-200 px-2 py-1 rounded-md text-sm font-bold mr-2">
+                  {data.highlightedContent.architectesStudy.badge}
+                </span>
+                {data.highlightedContent.architectesStudy.description}
+              </p>
+              <p className="mb-4 text-gray-600">
+                {data.highlightedContent.architectesStudy.details}
+              </p>
+              <ul className="list-disc pl-5 mb-4 text-gray-700 space-y-1">
+                {data.highlightedContent.architectesStudy.features?.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+            </div>
+            <Link 
+              to={data.highlightedContent.architectesStudy.linkUrl} 
+              className="btn-primary whitespace-nowrap bg-amber-600 hover:bg-amber-700"
+            >
+              {data.highlightedContent.architectesStudy.linkText}
+            </Link>
+          </div>
+        </InfoCard>
+      )}

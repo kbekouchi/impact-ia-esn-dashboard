@@ -84,7 +84,7 @@ const MetiersTransformation = () => {
               type="number" 
               domain={[0, 7]} 
               tickFormatter={formatNumber}
-              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15, fontSize: 14, fontWeight: 'bold' }}
+              label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15, fontSize: 16, fontWeight: 'bold' }}
             />
             <YAxis 
               dataKey="name" 

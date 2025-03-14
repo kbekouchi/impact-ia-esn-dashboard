@@ -1,0 +1,26 @@
+{
+  "title": "Business Analyst",
+  "description": "Le métier de Business Analyst évolue vers un rôle plus stratégique avec l'IA qui prend en charge l'analyse documentaire.",
+  "stats": [
+    { "label": "Gain productivité", "value": "37%" },
+    { "label": "Réduction analyse doc.", "value": "30-50%" },
+    { "label": "Avant IA", "value": "2-3 BA/projet" },
+    { "label": "Après IA", "value": "1 BA/projet" },
+    { "label": "Réduction effectifs", "value": "-60%" }
+  ],
+  "transformations": [
+    "Extraction automatisée d'exigences depuis la documentation",
+    "Génération assistée des spécifications fonctionnelles",
+    "Prototypage rapide à partir de descriptions textuelles",
+    "Analyse prédictive des impacts fonctionnels",
+    "Traduction automatisée langage métier-technique",
+    "Gain de productivité de 37% selon BCG (2023)"
+  ],
+  "projections": [
+    "Co-pilote d'analyse en temps réel",
+    "Modélisation métier autonome à partir de descriptions verbales",
+    "Validation proactive et détection d'incohérences",
+    "Simulation de comportements utilisateurs",
+    "Évolution vers un rôle de conseil stratégique"
+  ]
+}

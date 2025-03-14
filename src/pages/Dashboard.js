@@ -189,3 +189,63 @@ const Dashboard = () => {
                   tick={{ fontSize: 12, fontWeight: 'bold' }}
                   tickMargin={5}
                 />
+                <Tooltip content={customTooltipETP} />
+                <Legend 
+                  wrapperStyle={{ paddingTop: 5 }} 
+                  height={25}
+                />
+                <Bar 
+                  dataKey="avant" 
+                  name={texts.components.charts.etpAvant || "ETP avant IA"} 
+                  fill={chartsConfig.etpComparisonChart?.bars?.[0]?.fill || "#8884d8"}
+                >
+                  <LabelList dataKey="avant" position="right" formatter={formatNumber} />
+                </Bar>
+                <Bar 
+                  dataKey="apres" 
+                  name={texts.components.charts.etpApres || "ETP après IA"} 
+                  fill={chartsConfig.etpComparisonChart?.bars?.[1]?.fill || "#82ca9d"}
+                >
+                  <LabelList dataKey="apres" position="right" formatter={formatNumber} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </InfoCard>
+
+        <InfoCard title={texts.components.charts.budgetsTitle}>
+          <div style={{ height: chartsConfig.budgetChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={data.budgetData}
+                margin={{ 
+                  left: 0, 
+                  right: 5, 
+                  top: 10, 
+                  bottom: 10,
+                  ...chartsConfig.budgetChart?.margin 
+                }}
+              >
+                <CartesianGrid strokeDasharray={chartsConfig.budgetChart?.stroke || "3 3"} />
+                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                <YAxis 
+                  domain={chartsConfig.budgetChart?.domain || [0, 40]} 
+                  tick={{ fontSize: 12 }} 
+                />
+                <Tooltip />
+                <Legend height={chartsConfig.budgetChart?.legendHeight || 25} wrapperStyle={{ paddingTop: 5 }} />
+                <Bar 
+                  dataKey="avant" 
+                  name={texts.components.charts.budgetAvant || "Avant IA (%)"} 
+                  fill={chartsConfig.budgetChart?.bars?.[0]?.fill || "#8884d8"} 
+                />
+                <Bar 
+                  dataKey="apres" 
+                  name={texts.components.charts.budgetApres || "Après IA (%)"} 
+                  fill={chartsConfig.budgetChart?.bars?.[1]?.fill || "#82ca9d"} 
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </InfoCard>
+      </div>

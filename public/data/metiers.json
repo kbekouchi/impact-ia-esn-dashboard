@@ -1,0 +1,34 @@
+{
+  "etpComparaison": [
+    { 
+      "name": "Développeur", 
+      "avant": 6.5,
+      "apres": 2.5,
+      "reduction": "60%" 
+    },
+    { 
+      "name": "Business Analyst", 
+      "avant": 2.5,
+      "apres": 1, 
+      "reduction": "60%" 
+    },
+    { 
+      "name": "Testeur", 
+      "avant": 3.5,
+      "apres": 1, 
+      "reduction": "70%" 
+    },
+    { 
+      "name": "Architecte", 
+      "avant": 1, 
+      "apres": 0.33,
+      "reduction": "+200% périmètre" 
+    }
+  ],
+  "productivityData": [
+    { "name": "Développeur", "value": 55 },
+    { "name": "Business Analyst", "value": 37 },
+    { "name": "Testeur", "value": 65 },
+    { "name": "Architecte", "value": 40 }
+  ]
+}

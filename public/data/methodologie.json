@@ -1,0 +1,18 @@
+{
+  "approche": "Analyse multidimensionnelle combinant des données quantitatives d'études sectorielles et des analyses qualitatives",
+  "etapes": [
+    "Analyse des études récentes (2023-2024) de cabinets de conseil reconnus",
+    "Benchmarking des stratégies des ESN leaders face à la transformation IA",
+    "Estimation des impacts quantitatifs sur les effectifs et la productivité par métier",
+    "Analyse des budgets IT et de leur évolution face à l'intégration de l'IA générative",
+    "Élaboration de recommandations stratégiques pour les ESN"
+  ],
+  "limitations": [
+    "Projections d'impact sur les effectifs variables selon les spécificités des ESN",
+    "Temporalité et incertitude des projections à 3-5 ans",
+    "Hybridation métiers rendant moins pertinente l'analyse par métier traditionnel",
+    "Généralisation prudente des données quantitatives sur l'impact productif",
+    "Évolution rapide des technologies d'IA pouvant modifier les impacts estimés"
+  ],
+  "remerciements": "Cette étude a été réalisée avec le support de Claude, un assistant IA d'Anthropic, qui a contribué à l'analyse des données et à la structuration des informations."
+}

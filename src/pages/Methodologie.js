@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import InfoCard from '../components/InfoCard';
-import { sourcesList } from '../data/sourcesList';
+// Importation du service de données au lieu des données directement
+import { getSourcesList, getMethodologie } from '../services/dataService';
 
 const Methodologie = () => {
+  // Récupération des données via le service
+  const sourcesList = getSourcesList();
+  const methodologie = getMethodologie();
+  
   const [expandedCategory, setExpandedCategory] = useState(null);
 
   const toggleCategory = (category) => {

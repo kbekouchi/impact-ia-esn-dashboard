@@ -1,10 +1,14 @@
 import React from 'react';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
-import { adaptationStrategique } from '../data/benchmarksData';
+// Importation du service de données au lieu des données directement
+import { getAdaptationStrategique } from '../services/dataService';
 import { FaCheck, FaExclamationTriangle, FaClock, FaChartLine } from 'react-icons/fa';
 
 const StrategieAdaptation = () => {
+  // Récupération des données via le service
+  const adaptationStrategique = getAdaptationStrategique();
+  
   return (
     <div className="space-y-8">
       <div className="flex flex-col space-y-2">

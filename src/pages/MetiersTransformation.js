@@ -2,11 +2,30 @@ import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
-import { metiersData, tendancesTransversales } from '../data/metiersData';
+// Importation du service de données au lieu des données directement
+import {
+  getMetiersEtpComparaison,
+  getDeveloppeurData,
+  getBusinessAnalystData,
+  getArchitecteData,
+  getTesteurData,
+  getTendancesTransversales
+} from '../services/dataService';
 
 const MetiersTransformation = () => {
   const [selectedMetier, setSelectedMetier] = useState('developpeur');
-  const metierInfo = metiersData[selectedMetier];
+  
+  // Récupération des données via le service
+  const etpComparaison = getMetiersEtpComparaison();
+  const metiersDetails = {
+    developpeur: getDeveloppeurData(),
+    businessAnalyst: getBusinessAnalystData(),
+    architecte: getArchitecteData(),
+    testeur: getTesteurData()
+  };
+  const tendancesTransversales = getTendancesTransversales();
+  
+  const metierInfo = metiersDetails[selectedMetier];
 
   // Données pour les courbes
   const colors = {
@@ -34,7 +53,7 @@ const MetiersTransformation = () => {
           <p className="text-blue-600">ETP avant IA: {formatNumber(payload[0].value)}</p>
           <p className="text-green-600">ETP après IA: {formatNumber(payload[1].value)}</p>
           <p className="text-gray-700 font-bold">
-            Réduction: {metiersData.etpComparaison.find(item => item.name === label)?.reduction}
+            Réduction: {etpComparaison.find(item => item.name === label)?.reduction}
           </p>
         </div>
       );
@@ -56,7 +75,7 @@ const MetiersTransformation = () => {
       <InfoCard title="Évolution des ETP par métier">
         <ResponsiveContainer width="100%" height={450}>
           <BarChart 
-            data={metiersData.etpComparaison} 
+            data={etpComparaison} 
             layout="vertical"
             margin={{ left: 200, right: 40, top: 30, bottom: 30 }}
           >

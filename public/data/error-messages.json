@@ -1,0 +1,59 @@
+{
+  "data": {
+    "loading": "Chargement des données en cours...",
+    "loadError": "Une erreur est survenue lors du chargement des données.",
+    "retry": "Réessayer",
+    "noData": "Aucune donnée disponible.",
+    "dataOutdated": "Les données affichées pourraient ne pas être à jour."
+  },
+  "auth": {
+    "unauthorized": "Vous n'êtes pas autorisé à accéder à cette ressource.",
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter.",
+    "loginError": "Erreur lors de la connexion. Veuillez réessayer."
+  },
+  "navigation": {
+    "pageNotFound": "La page demandée n'existe pas.",
+    "returnHome": "Retourner à l'accueil",
+    "navigationError": "Erreur de navigation. Veuillez réessayer."
+  },
+  "validation": {
+    "required": "Ce champ est requis.",
+    "invalidFormat": "Format invalide.",
+    "numberRequired": "Ce champ doit contenir un nombre.",
+    "minValue": "La valeur doit être supérieure à {min}.",
+    "maxValue": "La valeur doit être inférieure à {max}.",
+    "minLength": "Ce champ doit contenir au moins {min} caractères.",
+    "maxLength": "Ce champ doit contenir au maximum {max} caractères."
+  },
+  "actions": {
+    "saveError": "Erreur lors de l'enregistrement. Veuillez réessayer.",
+    "saveSuccess": "Enregistrement réussi.",
+    "deleteError": "Erreur lors de la suppression. Veuillez réessayer.",
+    "deleteSuccess": "Suppression réussie.",
+    "updateError": "Erreur lors de la mise à jour. Veuillez réessayer.",
+    "updateSuccess": "Mise à jour réussie.",
+    "exportError": "Erreur lors de l'exportation. Veuillez réessayer.",
+    "exportSuccess": "Exportation réussie."
+  },
+  "connection": {
+    "offline": "Vous êtes actuellement hors ligne. Certaines fonctionnalités peuvent ne pas être disponibles.",
+    "reconnecting": "Tentative de reconnexion...",
+    "connectionError": "Erreur de connexion au serveur.",
+    "slowConnection": "Connexion lente détectée."
+  },
+  "generic": {
+    "error": "Une erreur est survenue.",
+    "success": "Opération réussie.",
+    "warning": "Attention!",
+    "info": "Information",
+    "confirm": "Êtes-vous sûr de vouloir effectuer cette action?"
+  },
+  "statusCodes": {
+    "400": "Requête incorrecte.",
+    "401": "Non autorisé.",
+    "403": "Accès refusé.",
+    "404": "Ressource non trouvée.",
+    "500": "Erreur interne du serveur.",
+    "503": "Service temporairement indisponible."
+  }
+}

@@ -73,40 +73,39 @@ const Dashboard = () => {
       {/* Graphiques principaux */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <InfoCard title="Impact sur les ETP par métier">
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart 
               data={metiersData.etpComparaison} 
               layout="vertical"
-              margin={{ left: 200, right: 40, top: 30, bottom: 30 }}
+              margin={{ left: 160, right: 40, top: 20, bottom: 20 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis 
                 type="number" 
                 domain={[0, 7]} 
                 tickFormatter={formatNumber}
-                label={{ value: 'Nombre d\'ETP', position: 'insideBottom', offset: -15 }}
               />
               <YAxis 
                 dataKey="name" 
                 type="category" 
-                width={180}
-                tick={{ fontSize: 16, fontWeight: 'bold' }}
-                tickMargin={10}
+                width={150}
+                tick={{ fontSize: 14, fontWeight: 'bold' }}
+                tickMargin={5}
               />
               <Tooltip content={customTooltipETP} />
-              <Legend wrapperStyle={{ paddingTop: 20 }} />
+              <Legend wrapperStyle={{ paddingTop: 15 }} />
               <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
-                <LabelList dataKey="avant" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+                <LabelList dataKey="avant" position="right" formatter={formatNumber} />
               </Bar>
               <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
-                <LabelList dataKey="apres" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+                <LabelList dataKey="apres" position="right" formatter={formatNumber} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </InfoCard>
 
         <InfoCard title="Évolution des budgets IT clients">
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="100%" height={350}>
             <BarChart data={budgetData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />

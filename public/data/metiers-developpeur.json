@@ -1,0 +1,26 @@
+{
+  "title": "Développeur",
+  "description": "Le métier de développeur est fortement transformé par l'automatisation du code et l'assistance au debugging.",
+  "stats": [
+    { "label": "Réduction temps codage", "value": "55%" },
+    { "label": "Code automatisé", "value": "30-40%" },
+    { "label": "Avant IA", "value": "5-8 dév./projet" },
+    { "label": "Après IA", "value": "2-3 dév./projet" },
+    { "label": "Réduction effectifs", "value": "-60%" }
+  ],
+  "transformations": [
+    "Automatisation du code de base (GitHub Copilot, CodeWhisperer)",
+    "Debugging assisté par IA",
+    "Documentation automatisée",
+    "Réduction des tâches à faible valeur ajoutée",
+    "Focus sur l'intégration et l'architecture",
+    "Adoption massive avec 40% des solutions apparues depuis 2023"
+  ],
+  "projections": [
+    "Développeur augmenté collaborant avec l'IA",
+    "Paradigme de programmation dirigé par prompts",
+    "Spécialisation dans les domaines complexes",
+    "Transition vers une expertise architecturale",
+    "Requalification nécessaire pour 80% des développeurs"
+  ]
+}

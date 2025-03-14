@@ -73,49 +73,58 @@ const Dashboard = () => {
       {/* Graphiques principaux */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <InfoCard title="Impact sur les ETP par métier">
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart 
-              data={metiersData.etpComparaison} 
-              layout="vertical"
-              margin={{ left: 160, right: 40, top: 20, bottom: 20 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                type="number" 
-                domain={[0, 7]} 
-                tickFormatter={formatNumber}
-              />
-              <YAxis 
-                dataKey="name" 
-                type="category" 
-                width={150}
-                tick={{ fontSize: 14, fontWeight: 'bold' }}
-                tickMargin={5}
-              />
-              <Tooltip content={customTooltipETP} />
-              <Legend wrapperStyle={{ paddingTop: 15 }} />
-              <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
-                <LabelList dataKey="avant" position="right" formatter={formatNumber} />
-              </Bar>
-              <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
-                <LabelList dataKey="apres" position="right" formatter={formatNumber} />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+          {/* Augmentons la hauteur pour mieux remplir l'encart */}
+          <div style={{ height: '450px' }} className="w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={metiersData.etpComparaison} 
+                layout="vertical"
+                margin={{ left: 160, right: 50, top: 20, bottom: 20 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis 
+                  type="number" 
+                  domain={[0, 7]} 
+                  tickFormatter={formatNumber}
+                />
+                <YAxis 
+                  dataKey="name" 
+                  type="category" 
+                  width={150}
+                  tick={{ fontSize: 14, fontWeight: 'bold' }}
+                  tickMargin={5}
+                />
+                <Tooltip content={customTooltipETP} />
+                <Legend wrapperStyle={{ paddingTop: 15 }} />
+                <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
+                  <LabelList dataKey="avant" position="right" formatter={formatNumber} />
+                </Bar>
+                <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
+                  <LabelList dataKey="apres" position="right" formatter={formatNumber} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </InfoCard>
 
         <InfoCard title="Évolution des budgets IT clients">
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={budgetData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis domain={[0, 40]} />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="avant" name="Avant IA (%)" fill="#8884d8" />
-              <Bar dataKey="apres" name="Après IA (%)" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
+          {/* Augmentons aussi cette hauteur pour la cohérence */}
+          <div style={{ height: '450px' }} className="w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart 
+                data={budgetData}
+                margin={{ left: 10, right: 10, top: 20, bottom: 20 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis domain={[0, 40]} />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="avant" name="Avant IA (%)" fill="#8884d8" />
+                <Bar dataKey="apres" name="Après IA (%)" fill="#82ca9d" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </InfoCard>
       </div>
 

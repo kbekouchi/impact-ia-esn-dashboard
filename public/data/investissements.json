@@ -1,0 +1,5 @@
+[
+  { "name": "Capgemini", "value": 2000, "label": "2 Mds €", "duree": "3 ans" },
+  { "name": "Accenture", "value": 3000, "label": "3 Mds $", "duree": "3 ans" },
+  { "name": "Sopra Steria", "value": 500, "label": "~500 M €", "duree": "2 ans" }
+]

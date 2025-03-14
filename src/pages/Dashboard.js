@@ -305,3 +305,58 @@ const Dashboard = () => {
           ))}
         </div>
       )}
+
+      {/* Productivité IA vs humain */}
+      {data.highlightedContent?.productivityComparison && (
+        <InfoCard 
+          title={data.highlightedContent.productivityComparison.title} 
+          bgColor={data.highlightedContent.productivityComparison.bgColor || "indigo"}
+        >
+          <div className="flex flex-col md:flex-row justify-between items-start">
+            <div className="pr-4">
+              <p className="mb-4 text-gray-600">
+                {data.highlightedContent.productivityComparison.description}
+              </p>
+              <p className="text-gray-600">
+                {data.highlightedContent.productivityComparison.details}
+              </p>
+            </div>
+            <Link 
+              to={data.highlightedContent.productivityComparison.linkUrl} 
+              className="mt-4 md:mt-0 btn-primary whitespace-nowrap"
+            >
+              {data.highlightedContent.productivityComparison.linkText}
+            </Link>
+          </div>
+        </InfoCard>
+      )}
+
+      {/* Méthodologie */}
+      <InfoCard 
+        title={texts.pages.dashboard?.sections?.methodologie?.title || "Méthodologie et Sources"} 
+        bgColor="gray"
+      >
+        <div className="flex flex-col md:flex-row justify-between items-start">
+          <div className="pr-4">
+            <p className="mb-4 text-gray-600">
+              {texts.pages.dashboard?.sections?.methodologie?.description || 
+                "Cette étude s'appuie sur des sources reconnues issues de cabinets de conseil et d'études sectorielles (McKinsey, Gartner, WEF, BCG) et intègre les dernières données disponibles sur l'impact de l'IA sur le secteur des services numériques."}
+            </p>
+            <p className="text-gray-600">
+              {texts.pages.dashboard?.sections?.methodologie?.details || 
+                "Notre approche méthodologique combine une analyse quantitative des impacts sur les effectifs et la productivité avec une analyse qualitative des transformations des métiers et des modèles d'affaires."}
+            </p>
+          </div>
+          <Link 
+            to="/methodologie" 
+            className="mt-4 md:mt-0 btn-primary whitespace-nowrap"
+          >
+            {texts.pages.dashboard?.sections?.methodologie?.buttonText || "Consulter les sources"}
+          </Link>
+        </div>
+      </InfoCard>
+    </div>
+  );
+};
+
+export default Dashboard;

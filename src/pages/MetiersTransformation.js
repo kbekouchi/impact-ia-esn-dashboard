@@ -71,7 +71,7 @@ const MetiersTransformation = () => {
         </p>
       </div>
 
-      {/* Graphique de comparaison ETP - Modifications apportées pour résoudre l'issue #11 */}
+      {/* Graphique de comparaison ETP - Solution robuste pour l'issue #11 */}
       <InfoCard title="Évolution des ETP par métier">
         <ResponsiveContainer width="100%" height={450}>
           <BarChart 
@@ -94,12 +94,26 @@ const MetiersTransformation = () => {
               tickMargin={10}
             />
             <Tooltip content={customTooltip} />
-            <Legend wrapperStyle={{ paddingTop: 20 }} />
+            <Legend 
+              wrapperStyle={{ paddingTop: 20 }}
+              verticalAlign="bottom"
+              align="center"
+            />
             <Bar dataKey="avant" name="ETP avant IA" fill="#8884d8">
-              <LabelList dataKey="avant" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+              <LabelList 
+                dataKey="avant" 
+                position="right" 
+                formatter={formatNumber} 
+                style={{ fontWeight: 'bold' }} 
+              />
             </Bar>
             <Bar dataKey="apres" name="ETP après IA" fill="#82ca9d">
-              <LabelList dataKey="apres" position="right" formatter={formatNumber} style={{ fontWeight: 'bold' }} />
+              <LabelList 
+                dataKey="apres" 
+                position="right" 
+                formatter={formatNumber} 
+                style={{ fontWeight: 'bold' }} 
+              />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

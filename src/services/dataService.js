@@ -1,6 +1,6 @@
 // Service centralisé pour l'accès aux données
 import { metiersData, tendancesTransversales } from '../data/metiersData';
-import { budgetData, investissementsData, strategiesEsn } from '../data/benchmarksData';
+import { budgetData, investissementsData, strategiesLeaders, impactEconomique, adaptationStrategique } from '../data/benchmarksData';
 import { sourcesList, methodologie } from '../data/sourcesList';
 
 /**
@@ -22,7 +22,10 @@ export const getTendancesTransversales = () => tendancesTransversales;
 // Données sur les benchmarks économiques
 export const getBudgetData = () => budgetData;
 export const getInvestissementsData = () => investissementsData;
-export const getStrategiesEsn = () => strategiesEsn;
+export const getStrategiesLeaders = () => strategiesLeaders;
+export const getImpactEconomique = () => impactEconomique;
+export const getStrategiesEsn = () => ({ strategiesLeaders, impactEconomique });
+export const getAdaptationStrategique = () => adaptationStrategique;
 
 // Données sur les sources et la méthodologie
 export const getSourcesList = () => sourcesList;
@@ -40,7 +43,10 @@ const dataService = {
   getTendancesTransversales,
   getBudgetData,
   getInvestissementsData,
+  getStrategiesLeaders,
+  getImpactEconomique,
   getStrategiesEsn,
+  getAdaptationStrategique,
   getSourcesList,
   getMethodologie
 };

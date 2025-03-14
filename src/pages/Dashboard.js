@@ -16,7 +16,8 @@ const Dashboard = () => {
     },
     etpComparaison: [],
     budgetData: [],
-    highlightedContent: {}
+    highlightedContent: {},
+    quickLinks: []
   });
   
   const [texts, setTexts] = useState({
@@ -282,4 +283,25 @@ const Dashboard = () => {
             </Link>
           </div>
         </InfoCard>
+      )}
+
+      {/* Sections principales - Accès rapide */}
+      {data.quickLinks && data.quickLinks.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {data.quickLinks.map((link, index) => (
+            <InfoCard key={index} title={link.title} bgColor={link.bgColor}>
+              <p className="mb-4 text-gray-600">
+                {link.description}
+              </p>
+              <ul className="list-disc pl-5 mb-4 text-gray-700 space-y-1">
+                {link.features?.map((feature, featureIndex) => (
+                  <li key={featureIndex}>{feature}</li>
+                ))}
+              </ul>
+              <Link to={link.linkUrl} className="btn-primary inline-block">
+                {link.linkText}
+              </Link>
+            </InfoCard>
+          ))}
+        </div>
       )}

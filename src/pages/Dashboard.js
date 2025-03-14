@@ -79,7 +79,7 @@ const Dashboard = () => {
               <BarChart 
                 data={metiersData.etpComparaison} 
                 layout="vertical"
-                margin={{ left: 150, right: 30, top: 10, bottom: 10 }}
+                margin={{ left: 0, right: 30, top: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis 
@@ -91,8 +91,8 @@ const Dashboard = () => {
                 <YAxis 
                   dataKey="name" 
                   type="category" 
-                  width={140}
-                  tick={{ fontSize: 14, fontWeight: 'bold' }}
+                  width={105}
+                  tick={{ fontSize: 12, fontWeight: 'bold' }}
                   tickMargin={5}
                 />
                 <Tooltip content={customTooltipETP} />
@@ -117,7 +117,7 @@ const Dashboard = () => {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart 
                 data={budgetData}
-                margin={{ left: 5, right: 5, top: 10, bottom: 10 }}
+                margin={{ left: 0, right: 5, top: 10, bottom: 10 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" tick={{ fontSize: 12 }} />

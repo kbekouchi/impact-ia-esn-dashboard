@@ -1,0 +1,55 @@
+{
+  "appTitle": "Impact IA ESN",
+  "appSubtitle": "Dashboard stratégique",
+  "menuItems": [
+    {
+      "id": "dashboard",
+      "path": "/",
+      "label": "Tableau de bord",
+      "icon": "FaHome",
+      "isExact": true
+    },
+    {
+      "id": "metiers",
+      "path": "/metiers-transformation",
+      "label": "Métiers en transformation",
+      "icon": "FaUsers",
+      "isExact": false
+    },
+    {
+      "id": "architectes",
+      "path": "/architectes-impact",
+      "label": "Impact sur les Architectes",
+      "icon": "FaLaptopCode",
+      "isExact": false
+    },
+    {
+      "id": "benchmarks",
+      "path": "/benchmarks-economiques",
+      "label": "Benchmarks économiques",
+      "icon": "FaChartBar",
+      "isExact": false
+    },
+    {
+      "id": "strategie",
+      "path": "/strategie-adaptation",
+      "label": "Stratégie d'adaptation",
+      "icon": "FaCog",
+      "isExact": false
+    },
+    {
+      "id": "temps",
+      "path": "/temps-economise",
+      "label": "Productivité IA vs Humain",
+      "icon": "FaClock",
+      "isExact": false
+    },
+    {
+      "id": "methodologie",
+      "path": "/methodologie",
+      "label": "Méthodologie et Sources",
+      "icon": "FaBook",
+      "isExact": false
+    }
+  ]
+}

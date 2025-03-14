@@ -99,182 +99,6 @@ const ArchitectesImpact = () => {
         { name: "Documentation d'architecture", valeur: 75 },
         { name: "Revues de code", valeur: 30 }
       ]
-    },
-    { 
-      type: 'Système', 
-      autoTaches: 30, 
-      augmentation: 60, 
-      reductionETP: 20,
-      description: "L'architecte système fait face à des défis d'infrastructure pour supporter les charges de calcul de l'IA. Son expertise devient essentielle pour dimensionner correctement les ressources nécessaires aux modèles d'IA.",
-      definition: "Responsable de l'infrastructure technique et de sa performance, l'architecte système conçoit et optimise les plateformes d'exécution des applications.",
-      activites: [
-        { 
-          nom: "Dimensionnement des infrastructures", 
-          description: "Calcul et planification des ressources matérielles nécessaires pour les applications" 
-        },
-        { 
-          nom: "Configuration des systèmes", 
-          description: "Définition des paramètres optimaux pour les serveurs, stockage, et réseaux" 
-        },
-        { 
-          nom: "Optimisation des performances", 
-          description: "Analyse et amélioration des performances des infrastructures existantes" 
-        },
-        { 
-          nom: "Supervision technique", 
-          description: "Mise en place des systèmes de monitoring et supervision des plateformes techniques" 
-        },
-        { 
-          nom: "Gestion de capacité", 
-          description: "Planification et évolution des capacités des infrastructures pour anticiper les besoins futurs" 
-        }
-      ],
-      competences: [
-        { name: "Infrastructure IA", value: 90 },
-        { name: "Scalabilité", value: 85 },
-        { name: "Optimisation ressources", value: 80 },
-        { name: "Sécurité systèmes", value: 75 },
-        { name: "Monitoring avancé", value: 70 }
-      ],
-      taches: [
-        { name: "Configuration infrastructure", valeur: 40 },
-        { name: "Dimensionnement", valeur: 30 },
-        { name: "Documentation système", valeur: 75 },
-        { name: "Audits de performance", valeur: 35 },
-        { name: "Résolution d'incidents", valeur: 25 }
-      ]
-    },
-    { 
-      type: 'Cloud', 
-      autoTaches: 45, 
-      augmentation: 70, 
-      reductionETP: 15,
-      description: "L'architecte cloud devient un pilier stratégique avec l'IA. Son expertise dans l'optimisation des coûts et le déploiement de services managés d'IA est particulièrement valorisée pour exploiter le plein potentiel du cloud.",
-      definition: "Expert en solutions d'infrastructure distribuée et services cloud, l'architecte cloud conçoit des architectures évolutives, résilientes et optimisées pour le cloud.",
-      activites: [
-        { 
-          nom: "Design d'architecture cloud", 
-          description: "Conception d'infrastructures cloud natives multi-tenants et hautement disponibles" 
-        },
-        { 
-          nom: "Optimisation des coûts", 
-          description: "Analyse et rationalisation des dépenses liées aux services cloud (FinOps)" 
-        },
-        { 
-          nom: "Automatisation de l'infrastructure", 
-          description: "Mise en place de l'Infrastructure as Code et des pipelines d'automatisation" 
-        },
-        { 
-          nom: "Stratégie multi-cloud", 
-          description: "Définition et mise en œuvre de stratégies d'orchestration multi-fournisseurs cloud" 
-        },
-        { 
-          nom: "Sécurisation des environnements", 
-          description: "Implémentation des mécanismes de sécurité spécifiques aux environnements cloud" 
-        }
-      ],
-      competences: [
-        { name: "Services managés IA", value: 95 },
-        { name: "Optimisation coûts", value: 85 },
-        { name: "Multi-cloud", value: 80 },
-        { name: "Infrastructure as Code", value: 75 },
-        { name: "Sécurité cloud", value: 85 }
-      ],
-      taches: [
-        { name: "Design d'infrastructure", valeur: 45 },
-        { name: "Scripts IaC", valeur: 60 },
-        { name: "Optimisation ressources", valeur: 35 },
-        { name: "Documentation cloud", valeur: 70 },
-        { name: "Audits de sécurité", valeur: 30 }
-      ]
-    },
-    { 
-      type: 'Données', 
-      autoTaches: 55, 
-      augmentation: 75, 
-      reductionETP: 10,
-      description: "L'architecte données se trouve au centre de la révolution IA. Son rôle évolue vers la conception de pipelines de données optimisés pour l'IA et la gouvernance des données d'entraînement et d'inférence.",
-      definition: "Responsable de l'organisation et de l'exploitation des données de l'entreprise, l'architecte données conçoit les structures permettant de collecter, stocker, traiter et valoriser les données.",
-      activites: [
-        { 
-          nom: "Modélisation des données", 
-          description: "Conception des modèles de données relationnels et non-relationnels, définition des ontologies" 
-        },
-        { 
-          nom: "Conception de pipelines", 
-          description: "Élaboration des chaînes de traitement pour le mouvement et la transformation des données (ETL/ELT)" 
-        },
-        { 
-          nom: "Gouvernance des données", 
-          description: "Définition des règles de qualité, conformité, et cycle de vie des données" 
-        },
-        { 
-          nom: "Ingénierie de la qualité", 
-          description: "Mise en place des mécanismes de contrôle et d'amélioration de la qualité des données" 
-        },
-        { 
-          nom: "Stratégie data", 
-          description: "Élaboration des approches pour la valorisation des données et leur exploitation par les métiers" 
-        }
-      ],
-      competences: [
-        { name: "Pipelines IA", value: 95 },
-        { name: "Gouvernance données", value: 90 },
-        { name: "Qualité des données", value: 85 },
-        { name: "Modélisation avancée", value: 80 },
-        { name: "Éthique & Biais", value: 85 }
-      ],
-      taches: [
-        { name: "Modélisation de données", valeur: 55 },
-        { name: "ETL/ELT", valeur: 70 },
-        { name: "Documentation data", valeur: 65 },
-        { name: "Contrôles qualité", valeur: 40 },
-        { name: "Gestion des métadonnées", valeur: 35 }
-      ]
-    },
-    { 
-      type: 'Sécurité', 
-      autoTaches: 25, 
-      augmentation: 80, 
-      reductionETP: 5,
-      description: "L'architecte sécurité voit son rôle se renforcer avec l'IA. Il doit désormais comprendre les nouvelles vulnérabilités spécifiques aux systèmes d'IA et développer des stratégies de protection adaptées.",
-      definition: "Garant de la protection des SI et de la conformité, l'architecte sécurité élabore la stratégie de sécurité et définit les mesures techniques et organisationnelles pour protéger les systèmes.",
-      activites: [
-        { 
-          nom: "Définition des politiques", 
-          description: "Élaboration des politiques, standards et procédures de sécurité de l'information" 
-        },
-        { 
-          nom: "Évaluation des risques", 
-          description: "Identification et classification des risques de sécurité, définition des plans de traitement" 
-        },
-        { 
-          nom: "Conformité réglementaire", 
-          description: "Vérification de la conformité aux réglementations (RGPD, PCI-DSS, etc.) et préparation aux audits" 
-        },
-        { 
-          nom: "Architecture de sécurité", 
-          description: "Conception des architectures de protection (IAM, cryptographie, segmentation réseau, etc.)" 
-        },
-        { 
-          nom: "Gestion des incidents", 
-          description: "Définition des procédures de détection et de réponse aux incidents de sécurité" 
-        }
-      ],
-      competences: [
-        { name: "Sécurité des modèles IA", value: 90 },
-        { name: "Protection des données", value: 95 },
-        { name: "Détection avancée", value: 85 },
-        { name: "Conformité IA", value: 80 },
-        { name: "Gestion des risques", value: 90 }
-      ],
-      taches: [
-        { name: "Audits de sécurité", valeur: 30 },
-        { name: "Documentation sécurité", valeur: 75 },
-        { name: "Tests de pénétration", valeur: 40 },
-        { name: "Gestion des incidents", valeur: 20 },
-        { name: "Veille sécurité", valeur: 25 }
-      ]
     }
   ];
   
@@ -289,26 +113,6 @@ const ArchitectesImpact = () => {
       { year: "2 ans", augmentation: 55, autoTaches: 40, reductionETP: 30 },
       { year: "5 ans", augmentation: 70, autoTaches: 55, reductionETP: 45 },
       { year: "10 ans", augmentation: 85, autoTaches: 65, reductionETP: 50 }
-    ],
-    Système: [
-      { year: "2 ans", augmentation: 60, autoTaches: 30, reductionETP: 20 },
-      { year: "5 ans", augmentation: 75, autoTaches: 45, reductionETP: 30 },
-      { year: "10 ans", augmentation: 85, autoTaches: 55, reductionETP: 35 }
-    ],
-    Cloud: [
-      { year: "2 ans", augmentation: 70, autoTaches: 45, reductionETP: 15 },
-      { year: "5 ans", augmentation: 85, autoTaches: 60, reductionETP: 25 },
-      { year: "10 ans", augmentation: 95, autoTaches: 70, reductionETP: 30 }
-    ],
-    Données: [
-      { year: "2 ans", augmentation: 75, autoTaches: 55, reductionETP: 10 },
-      { year: "5 ans", augmentation: 90, autoTaches: 70, reductionETP: 20 },
-      { year: "10 ans", augmentation: 95, autoTaches: 80, reductionETP: 25 }
-    ],
-    Sécurité: [
-      { year: "2 ans", augmentation: 80, autoTaches: 25, reductionETP: 5 },
-      { year: "5 ans", augmentation: 90, autoTaches: 35, reductionETP: 10 },
-      { year: "10 ans", augmentation: 95, autoTaches: 45, reductionETP: 15 }
     ]
   };
 
@@ -327,34 +131,6 @@ const ArchitectesImpact = () => {
       "Design de microservices pour systèmes IA",
       "CI/CD pour applications IA",
       "Architecture event-driven pour systèmes prédictifs"
-    ],
-    Système: [
-      "Infrastructure optimisée pour l'IA",
-      "Scalabilité des systèmes à forte charge computationnelle",
-      "Monitoring et observabilité avancés",
-      "Orchestration de conteneurs pour workloads IA",
-      "Systèmes distribués pour l'inférence IA"
-    ],
-    Cloud: [
-      "Services managés d'IA dans le cloud",
-      "Optimisation des coûts d'inférence et d'entraînement",
-      "Architecture multi-cloud pour l'IA",
-      "Infrastructure as Code avancée",
-      "Sécurisation des environnements cloud d'IA"
-    ],
-    Données: [
-      "Architecture des pipelines de données pour l'IA",
-      "Gouvernance des données d'entraînement",
-      "Feature stores et Feature engineering",
-      "Data mesh et architecture décentralisée",
-      "MLOps et automatisation des flux de données"
-    ],
-    Sécurité: [
-      "Sécurité des modèles d'IA",
-      "Protection contre les attaques adversariales",
-      "Sécurisation des données d'entraînement",
-      "Détection d'anomalies basée sur l'IA",
-      "Conformité et audit des systèmes d'IA"
     ]
   };
   
@@ -429,3 +205,184 @@ const ArchitectesImpact = () => {
           </ul>
         </div>
       </div>
+      
+      {/* Sélecteur de type d'architecte */}
+      <div className="mb-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-bold mb-4">Sélectionnez un type d'architecte :</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {impactData.map((item) => (
+            <button
+              key={item.type}
+              className={`py-2 px-4 rounded-md transition-colors ${
+                selectedArchitecte === item.type 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-gray-200 hover:bg-gray-300'
+              }`}
+              onClick={() => setSelectedArchitecte(item.type)}
+            >
+              Architecte {item.type}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* Présentation du profil sélectionné */}
+      <div className="mb-10 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-blue-700">Architecte {selectedArchitecte}</h2>
+        
+        {/* Définition du rôle - Nouveau */}
+        <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <h3 className="font-bold text-lg mb-2 text-blue-800">Définition du rôle</h3>
+          <p className="text-gray-800">{selectedData.definition}</p>
+        </div>
+        
+        {/* Description de l'impact de l'IA */}
+        <p className="mb-6">{selectedData.description}</p>
+        
+        {/* Activités et tâches quotidiennes - Nouveau */}
+        <div className="mb-6">
+          <h3 className="font-bold text-lg mb-4 text-blue-700">Activités et tâches quotidiennes</h3>
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            {selectedData.activites.map((activite, index) => (
+              <div key={index} className={`p-4 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                <h4 className="font-medium text-blue-600">{activite.nom}</h4>
+                <p className="text-gray-700 mt-1">{activite.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h3 className="font-bold text-lg mb-2 text-blue-800">Tâches automatisables</h3>
+            <div className="flex items-center justify-center">
+              <div className="text-4xl font-bold text-blue-700">{selectedData.autoTaches}%</div>
+            </div>
+          </div>
+          
+          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+            <h3 className="font-bold text-lg mb-2 text-green-800">Augmentation de productivité</h3>
+            <div className="flex items-center justify-center">
+              <div className="text-4xl font-bold text-green-700">{selectedData.augmentation}%</div>
+            </div>
+          </div>
+          
+          <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+            <h3 className="font-bold text-lg mb-2 text-red-800">Réduction potentielle ETP</h3>
+            <div className="flex items-center justify-center">
+              <div className="text-4xl font-bold text-red-700">{selectedData.reductionETP}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Graphiques d'analyse */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        {/* Graphique des compétences clés */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold mb-6 text-blue-700">Compétences clés émergentes</h2>
+          <div style={{ width: '100%', height: 350 }}>
+            <ResponsiveContainer>
+              <RadarChart data={selectedData.competences}>
+                <PolarGrid />
+                <PolarAngleAxis dataKey="name" />
+                <PolarRadiusAxis domain={[0, 100]} tickFormatter={formatPercent} />
+                <Radar name="Importance" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                <Tooltip formatter={formatPercent} />
+              </RadarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+        
+        {/* Graphique d'automatisation des tâches */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold mb-6 text-blue-700">Potentiel d'automatisation par tâche</h2>
+          <div style={{ width: '100%', height: 350 }}>
+            <ResponsiveContainer>
+              <BarChart
+                data={selectedData.taches}
+                layout="vertical"
+                margin={{ top: 20, right: 30, left: 120, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis type="number" domain={[0, 100]} tickFormatter={formatPercent} />
+                <YAxis dataKey="name" type="category" width={100} />
+                <Tooltip formatter={formatPercent} />
+                <Bar dataKey="valeur" fill="#82ca9d">
+                  <LabelList dataKey="valeur" position="right" formatter={formatPercent} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+      
+      {/* Projections à 2, 5 et 10 ans */}
+      <div className="mb-10 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-6 text-blue-700">Projections à 2, 5 et 10 ans</h2>
+        <div style={{ width: '100%', height: 400 }}>
+          <ResponsiveContainer>
+            <BarChart
+              data={selectedProjections}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="year" />
+              <YAxis tickFormatter={formatPercent} />
+              <Tooltip content={<CustomTooltip />} />
+              <Legend />
+              <Bar dataKey="augmentation" name="Augmentation productivité" fill="#82ca9d" />
+              <Bar dataKey="autoTaches" name="Automatisation des tâches" fill="#8884d8" />
+              <Bar dataKey="reductionETP" name="Réduction potentielle ETP" fill="#ff8042" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      
+      {/* Recommandations pour le développement professionnel */}
+      <div className="mb-10 bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-blue-700">Recommandations de formation</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-blue-600">Formations spécifiques</h3>
+            <ul className="list-disc ml-6 space-y-2">
+              {selectedFormations.map((formation, index) => (
+                <li key={index} className="text-gray-800">{formation}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="text-xl font-bold mb-4 text-blue-600">Compétences transversales</h3>
+            <ul className="list-disc ml-6 space-y-2">
+              {competencesTransversales.map((competence, index) => (
+                <li key={index} className="text-gray-800">{competence}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      {/* Lien vers la documentation */}
+      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 flex justify-between items-center">
+        <div>
+          <p className="font-medium text-gray-800">
+            Pour en savoir plus sur la méthodologie et les sources utilisées pour cette étude :
+          </p>
+        </div>
+        <Link 
+          to="/architectes-documentation" 
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          Consulter la documentation
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default ArchitectesImpact;

@@ -132,6 +132,125 @@
         }
       }
     },
+    "stateDisplay": {
+      "container": {
+        "base": "flex flex-col items-center justify-center p-6 text-center rounded-lg",
+        "fullHeight": "h-64",
+        "autoHeight": "py-12"
+      },
+      "states": {
+        "loading": {
+          "icon": {
+            "component": "spinner",
+            "size": "h-10 w-10",
+            "color": "text-blue-600",
+            "animation": "animate-spin",
+            "classes": "rounded-full border-b-2 border-blue-600 mx-auto mb-4"
+          },
+          "text": {
+            "classes": "text-gray-700 font-medium",
+            "messageKey": "data.loading"
+          }
+        },
+        "error": {
+          "icon": {
+            "component": "exclamation-triangle",
+            "size": "text-4xl",
+            "color": "text-red-600",
+            "classes": "mx-auto mb-4"
+          },
+          "title": {
+            "classes": "text-xl font-bold mb-2 text-red-600",
+            "messageKey": "generic.error"
+          },
+          "text": {
+            "classes": "text-gray-700 mb-4",
+            "messageKey": "data.loadError"
+          },
+          "action": {
+            "type": "button",
+            "classes": "mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700",
+            "labelKey": "data.retry",
+            "action": "reload"
+          }
+        },
+        "empty": {
+          "icon": {
+            "component": "folder-open",
+            "size": "text-4xl",
+            "color": "text-gray-400",
+            "classes": "mx-auto mb-4"
+          },
+          "title": {
+            "classes": "text-xl font-bold mb-2 text-gray-500",
+            "messageKey": "generic.info"
+          },
+          "text": {
+            "classes": "text-gray-500",
+            "messageKey": "data.noData"
+          }
+        },
+        "success": {
+          "icon": {
+            "component": "check-circle",
+            "size": "text-4xl",
+            "color": "text-green-600",
+            "classes": "mx-auto mb-4"
+          },
+          "title": {
+            "classes": "text-xl font-bold mb-2 text-green-600",
+            "messageKey": "generic.success" 
+          },
+          "text": {
+            "classes": "text-gray-700",
+            "messageKey": "actions.saveSuccess"
+          }
+        }
+      },
+      "themes": {
+        "minimal": {
+          "container": {
+            "base": "flex items-center justify-center space-x-3",
+            "fullHeight": "",
+            "autoHeight": ""
+          },
+          "states": {
+            "loading": {
+              "icon": {
+                "component": "spinner",
+                "size": "h-5 w-5",
+                "color": "text-blue-600",
+                "animation": "animate-spin",
+                "classes": "rounded-full border-b-2 border-blue-600"
+              },
+              "text": {
+                "classes": "text-sm text-gray-600",
+                "messageKey": "data.loading"
+              }
+            },
+            "error": {
+              "icon": {
+                "component": "exclamation",
+                "size": "text-sm",
+                "color": "text-red-600",
+                "classes": ""
+              },
+              "text": {
+                "classes": "text-sm text-red-600",
+                "messageKey": "data.loadError"
+              }
+            }
+          }
+        },
+        "card": {
+          "container": {
+            "base": "rounded-lg bg-white shadow-md p-8 text-center",
+            "fullHeight": "h-64",
+            "autoHeight": "py-12"
+          }
+        }
+      }
+    },
     "charts": {
       "colors": ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"],
       "dimensions": {

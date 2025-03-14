@@ -1,0 +1,26 @@
+{
+  "title": "Testeur",
+  "description": "Le métier de testeur est profondément transformé avec une forte automatisation et une évolution vers un rôle de stratège qualité.",
+  "stats": [
+    { "label": "Tests automatisés", "value": "60-75%" },
+    { "label": "Avant IA", "value": "3-4 testeurs/10 dev." },
+    { "label": "Après IA", "value": "1 testeur/10 dev." },
+    { "label": "Réduction effectifs", "value": "-70%" },
+    { "label": "Évolution", "value": "Stratège qualité" }
+  ],
+  "transformations": [
+    "Génération automatique de scénarios de test",
+    "Auto-maintenance des tests lors des changements de code",
+    "Analyse prédictive des zones à risque de bugs",
+    "Tests exploratoires assistés par IA",
+    "Analyse de couverture augmentée",
+    "Évolution du profil vers la conception de stratégie de test"
+  ],
+  "projections": [
+    "Testing complètement autonome avec intervention humaine minimale",
+    "Évolution vers un rôle de stratège définissant la politique qualité",
+    "Tests continus et adaptatifs en temps réel",
+    "Simulation de comportements utilisateurs complexes",
+    "Détection préemptive des problèmes avant leur apparition"
+  ]
+}

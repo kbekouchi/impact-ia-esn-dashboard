@@ -1,0 +1,122 @@
+{
+  "pages": {
+    "dashboard": {
+      "title": "Impact de l'IA sur les ESN",
+      "description": "Dashboard stratégique présentant l'impact de l'IA générative et agentique sur les métiers des ESN et l'évolution nécessaire de leur modèle d'affaires.",
+      "sections": {
+        "newStudy": {
+          "title": "NOUVEAU : Impact de l'IA sur les architectes informatiques",
+          "badge": "Étude exclusive",
+          "description": "Découvrez notre analyse approfondie sur l'impact spécifique de l'IA sur les différents types d'architectes informatiques.",
+          "details": "Cette étude détaille l'évolution du rôle de 6 types d'architectes (SI, Applicatif, Système, Cloud, Données et Sécurité) face à l'IA, avec des projections à 2, 5 et 10 ans et des recommandations de développement professionnel.",
+          "features": [
+            "Analyse des tâches automatisables par profil",
+            "Évolution des compétences clés requises",
+            "Projections d'impact par spécialisation",
+            "Recommandations de formation ciblées"
+          ],
+          "buttonText": "Accéder à l'étude"
+        },
+        "metiersTransformation": {
+          "title": "Métiers en transformation",
+          "description": "Analyse détaillée de l'impact de l'IA sur les métiers des ESN : développeurs, business analysts, architectes et testeurs.",
+          "features": [
+            "Réduction de 60-70% des ETP",
+            "Productivité +37% à +65%",
+            "Automatisation 30-75% des tâches"
+          ],
+          "buttonText": "Voir l'analyse complète"
+        },
+        "benchmarks": {
+          "title": "Benchmarks économiques",
+          "description": "Comparaison des stratégies des ESN leaders et analyse de l'évolution des budgets IT des clients face à l'IA.",
+          "features": [
+            "Investissements majeurs des leaders",
+            "Évolution des attentes clients",
+            "Réorientation des budgets IT"
+          ],
+          "buttonText": "Explorer les benchmarks"
+        },
+        "strategie": {
+          "title": "Stratégie d'adaptation",
+          "description": "Recommandations stratégiques pour les ESN face à la transformation du marché par l'IA.",
+          "features": [
+            "Évolution du modèle économique",
+            "Nouvelles offres et positionnement",
+            "Plans de transformation 2024-2027"
+          ],
+          "buttonText": "Consulter les recommandations"
+        },
+        "productivite": {
+          "title": "Productivité IA vs Développement humain",
+          "description": "Découvrez une démonstration concrète du potentiel de transformation de l'IA : cette application elle-même a été développée en quelques heures avec l'IA, alors qu'un développement humain traditionnel aurait nécessité environ 38-40 jours de travail.",
+          "details": "Une analyse comparative détaillée montre un facteur d'accélération d'environ 80x, avec une visualisation phase par phase des économies de temps réalisées.",
+          "buttonText": "Voir la comparaison"
+        },
+        "methodologie": {
+          "title": "Méthodologie et Sources",
+          "description": "Cette étude s'appuie sur des sources reconnues issues de cabinets de conseil et d'études sectorielles (McKinsey, Gartner, WEF, BCG) et intègre les dernières données disponibles sur l'impact de l'IA sur le secteur des services numériques.",
+          "details": "Notre approche méthodologique combine une analyse quantitative des impacts sur les effectifs et la productivité avec une analyse qualitative des transformations des métiers et des modèles d'affaires.",
+          "buttonText": "Consulter les sources"
+        }
+      }
+    },
+    "metiersTransformation": {
+      "title": "Transformation des métiers par l'IA",
+      "description": "Analyse détaillée de l'impact de l'IA sur les principaux métiers des ESN et les compétences qui seront valorisées."
+    },
+    "benchmarksEconomiques": {
+      "title": "Benchmarks économiques",
+      "description": "Analyse comparative des stratégies d'adaptation des ESN leaders et de l'évolution des budgets IT."
+    },
+    "strategieAdaptation": {
+      "title": "Stratégie d'adaptation",
+      "description": "Recommandations pour adapter le modèle d'affaires et l'organisation des ESN face à l'IA."
+    },
+    "tempsEconomise": {
+      "title": "Temps économisé",
+      "description": "Estimation du temps économisé grâce à l'IA générative pour ce projet et métriques associées."
+    },
+    "architectesImpact": {
+      "title": "Impact sur les Architectes",
+      "description": "Analyse approfondie de l'impact de l'IA sur les différents types d'architectes informatiques."
+    },
+    "architectesDocumentation": {
+      "title": "Documentation pour les Architectes",
+      "description": "Ressources et documentation spécifiques pour les architectes face à l'IA."
+    },
+    "methodologie": {
+      "title": "Méthodologie et Sources",
+      "description": "Présentation de la démarche méthodologique et des sources utilisées pour cette étude."
+    }
+  },
+  "components": {
+    "tooltips": {
+      "etpChart": "Équivalent Temps Plein - Mesure l'impact sur les ressources humaines"
+    },
+    "errors": {
+      "dataLoad": "Une erreur est survenue lors du chargement des données.",
+      "retry": "Réessayer",
+      "noData": "Aucune donnée disponible."
+    },
+    "statCards": {
+      "reductionEtpTitle": "Réduction moyenne ETP",
+      "reductionEtpDescription": "Réduction moyenne des effectifs sur les métiers impactés",
+      "productiviteTitle": "Productivité développeurs",
+      "productiviteDescription": "Gain de productivité des développeurs avec l'IA",
+      "budgetsTitle": "Budgets IA clients",
+      "budgetsDescription": "Entreprises augmentant leur budget IA",
+      "requalificationTitle": "Requalification",
+      "requalificationDescription": "Effectifs à requalifier d'ici 2027"
+    },
+    "charts": {
+      "etpTitle": "Impact sur les ETP par métier",
+      "budgetsTitle": "Évolution des budgets IT clients",
+      "etpAvant": "ETP avant IA",
+      "etpApres": "ETP après IA",
+      "budgetAvant": "Avant IA (%)",
+      "budgetApres": "Après IA (%)",
+      "reduction": "Réduction"
+    }
+  }
+}

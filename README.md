@@ -1,114 +1,91 @@
-# Impact IA sur les ESN - Dashboard
+# Impact IA ESN Dashboard
 
-![Statut du projet](https://img.shields.io/badge/Statut-En%20d%C3%A9veloppement-green)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+Dashboard stratégique présentant l'impact de l'IA générative et agentique sur les métiers des ESN et l'évolution nécessaire de leur modèle d'affaires.
 
-## À propos du projet
+## Fonctionnalités
 
-Ce dashboard interactif visualise l'impact de l'Intelligence Artificielle (IA) générative et agentique sur les métiers des Entreprises de Services Numériques (ESN) et l'évolution nécessaire de leur modèle d'affaires.
+- Visualisation de l'impact de l'IA sur différents métiers des ESN
+- Benchmarks économiques et évolution des budgets IT face à l'IA
+- Analyse détaillée de l'impact sur les architectes
+- Stratégies d'adaptation recommandées
+- Comparaison de productivité entre l'IA et le développement humain
 
-<p align="center">
-  <img src="https://via.placeholder.com/800x400?text=Impact+IA+ESN+Dashboard" alt="Aperçu du Dashboard" />
-</p>
+## Structure du projet
 
-## Fonctionnalités principales
+Le projet est structuré comme suit :
 
-- **Analyse des transformations des métiers** : Impact détaillé de l'IA sur les développeurs, business analysts, architectes et testeurs
-- **Benchmarks économiques** : Comparaison des stratégies des ESN leaders (Capgemini, Accenture, Sopra Steria)
-- **Stratégies d'adaptation** : Feuille de route pour transformer le modèle d'affaires des ESN
-- **Sources et méthodologie** : Documentation complète des sources utilisées et de l'approche d'analyse
-- **Comparaison de productivité** : Démonstration de l'impact de l'IA sur le développement logiciel, à travers la création même de cette application
+```
+/
+├── public/
+│   ├── data/         # Fichiers JSON externalisés
+│   │   ├── app-config.json
+│   │   ├── charts-config.json
+│   │   ├── dashboard-data.json
+│   │   ├── error-messages.json
+│   │   ├── nav-config.json
+│   │   ├── ui-config.json
+│   │   └── ui-texts.json
+│   └── index.html
+├── src/
+│   ├── components/   # Composants réutilisables
+│   ├── data/         # Fichiers de données (fallback)
+│   ├── pages/        # Pages de l'application
+│   ├── services/     # Services d'accès aux données
+│   └── App.js        # Point d'entrée de l'application
+└── scripts/
+    └── generateJsonData.js  # Script de génération des fichiers JSON
+```
 
-## Démarrage rapide
+## Architecture des données
+
+L'application utilise une architecture de données externalisées pour faciliter la maintenance et les mises à jour. Toutes les données sont chargées dynamiquement à partir des fichiers JSON dans le dossier `public/data/`.
+
+- **Configuration de l'interface** : `ui-config.json` et `ui-texts.json`
+- **Configuration de navigation** : `nav-config.json`
+- **Données spécifiques aux pages** : `dashboard-data.json`, etc.
+- **Messages d'erreur** : `error-messages.json`
+- **Configuration des graphiques** : `charts-config.json`
+
+En cas d'échec de chargement des fichiers JSON, l'application dispose d'un mécanisme de fallback sur les données en dur définies dans le dossier `src/data/`.
+
+## Génération des fichiers JSON
+
+Pour générer ou mettre à jour les fichiers JSON à partir des données en dur :
+
+```bash
+npm run generate-json
+```
+
+Ce script analyse le code source pour extraire les textes d'interface, les configurations et les données, puis génère les fichiers JSON correspondants dans le dossier `public/data/`.
+
+## Extension des fonctionnalités
+
+Pour ajouter une nouvelle page ou fonctionnalité :
+
+1. Créer le composant de page correspondant dans `src/pages/`
+2. Ajouter les textes et configurations dans les fichiers JSON appropriés
+3. Ajouter la route dans `app-config.json`
+4. Mettre à jour le service de données pour charger les nouvelles données
+
+## Développement
 
 ### Prérequis
 
-- Node.js (v14.0.0 ou supérieur)
-- npm (v6.0.0 ou supérieur) ou yarn
+- Node.js 14+
+- npm ou yarn
 
 ### Installation
 
 ```bash
 # Cloner le dépôt
 git clone https://github.com/kbekouchi/impact-ia-esn-dashboard.git
-
-# Naviguer vers le répertoire
 cd impact-ia-esn-dashboard
 
 # Installer les dépendances
 npm install
-# ou
-yarn install
 
-# Démarrer l'application
+# Lancer l'application en mode développement
 npm start
-# ou
-yarn start
 ```
 
-Consultez notre [Guide d'installation](./INSTALLATION.md) pour des instructions plus détaillées.
-
-## Documentation
-
-Une documentation complète est disponible :
-
-- [Documentation générale](./DOCUMENTATION.md) - Architecture, fonctionnalités et données
-- [Guide d'installation](./INSTALLATION.md) - Instructions détaillées pour l'installation et le déploiement
-- [Guide de contribution](./CONTRIBUTING.md) - Comment contribuer au projet
-
-## Captures d'écran
-
-<div align="center">
-  <img src="https://via.placeholder.com/400x225?text=Dashboard+Principal" alt="Dashboard principal" width="400"/>
-  <img src="https://via.placeholder.com/400x225?text=Transformations+Métiers" alt="Transformations métiers" width="400"/>
-  <img src="https://via.placeholder.com/400x225?text=Benchmarks+Économiques" alt="Benchmarks économiques" width="400"/>
-  <img src="https://via.placeholder.com/400x225?text=Stratégie+d'Adaptation" alt="Stratégie d'adaptation" width="400"/>
-</div>
-
-## Technologies utilisées
-
-- **Frontend** : React, React Router, Recharts
-- **Styling** : Tailwind CSS
-- **Outils de développement** : Create React App, ESLint
-
-## Structure du projet
-
-```
-impact-ia-esn-dashboard/
-├── public/                  # Ressources statiques
-├── src/                     # Code source
-│   ├── components/          # Composants réutilisables
-│   ├── data/                # Données et sources
-│   ├── pages/               # Pages principales
-│   ├── App.js               # Composant racine
-│   └── index.js             # Point d'entrée
-└── ...                      # Autres fichiers de configuration
-```
-
-## Roadmap
-
-- [ ] Ajout d'un module de simulation personnalisée
-- [ ] Intégration de mises à jour automatiques depuis les sources de données
-- [ ] Support multilingue
-- [ ] Version mobile optimisée
-- [ ] Mode hors ligne
-
-## Contribution
-
-Les contributions sont les bienvenues ! Consultez notre [Guide de contribution](./CONTRIBUTING.md) pour commencer.
-
-## Licence
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](./LICENSE) pour plus de détails.
-
-## Contact
-
-Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue sur ce dépôt.
-
-## Remerciements
-
-- [McKinsey](https://www.mckinsey.com/) - Pour leurs études sur l'IA générative
-- [Gartner](https://www.gartner.com/) - Pour leurs analyses des tendances IT
-- [World Economic Forum](https://www.weforum.org/) - Pour le Future of Jobs Report
-- [GitHub](https://github.blog/) - Pour leurs études sur la productivité des développeurs
+L'application sera disponible à l'adresse [http://localhost:3000](http://localhost:3000).

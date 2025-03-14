@@ -1,0 +1,14 @@
+{
+  "reductionCouts": [
+    { "label": "Baisse fonctions automatisables", "value": "25-30%" },
+    { "label": "Hausse globale budgets IT", "value": "+3%" },
+    { "label": "Entreprises augmentant budget IA", "value": "81%" },
+    { "label": "Réorientation budgets", "value": "IA, Cyber, Cloud" }
+  ],
+  "attentesClients": [
+    "Facturation à la valeur plutôt qu'au temps passé",
+    "Exigence de ROI démontrable sur les projets",
+    "Attente de co-innovation et partage de risques",
+    "Besoin d'expertise dans la transformation par l'IA"
+  ]
+}

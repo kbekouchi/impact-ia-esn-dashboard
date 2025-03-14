@@ -99,6 +99,94 @@ const ArchitectesImpact = () => {
         { name: "Documentation d'architecture", valeur: 75 },
         { name: "Revues de code", valeur: 30 }
       ]
+    },
+    { 
+      type: 'Système', 
+      autoTaches: 30, 
+      augmentation: 60, 
+      reductionETP: 20,
+      description: "L'architecte système fait face à des défis d'infrastructure pour supporter les charges de calcul de l'IA. Son expertise devient essentielle pour dimensionner correctement les ressources nécessaires aux modèles d'IA.",
+      definition: "Responsable de l'infrastructure technique et de sa performance, l'architecte système conçoit et optimise les plateformes d'exécution des applications.",
+      activites: [
+        { 
+          nom: "Dimensionnement des infrastructures", 
+          description: "Calcul et planification des ressources matérielles nécessaires pour les applications" 
+        },
+        { 
+          nom: "Configuration des systèmes", 
+          description: "Définition des paramètres optimaux pour les serveurs, stockage, et réseaux" 
+        },
+        { 
+          nom: "Optimisation des performances", 
+          description: "Analyse et amélioration des performances des infrastructures existantes" 
+        },
+        { 
+          nom: "Supervision technique", 
+          description: "Mise en place des systèmes de monitoring et supervision des plateformes techniques" 
+        },
+        { 
+          nom: "Gestion de capacité", 
+          description: "Planification et évolution des capacités des infrastructures pour anticiper les besoins futurs" 
+        }
+      ],
+      competences: [
+        { name: "Infrastructure IA", value: 90 },
+        { name: "Scalabilité", value: 85 },
+        { name: "Optimisation ressources", value: 80 },
+        { name: "Sécurité systèmes", value: 75 },
+        { name: "Monitoring avancé", value: 70 }
+      ],
+      taches: [
+        { name: "Configuration infrastructure", valeur: 40 },
+        { name: "Dimensionnement", valeur: 30 },
+        { name: "Documentation système", valeur: 75 },
+        { name: "Audits de performance", valeur: 35 },
+        { name: "Résolution d'incidents", valeur: 25 }
+      ]
+    },
+    { 
+      type: 'Cloud', 
+      autoTaches: 45, 
+      augmentation: 70, 
+      reductionETP: 15,
+      description: "L'architecte cloud devient un pilier stratégique avec l'IA. Son expertise dans l'optimisation des coûts et le déploiement de services managés d'IA est particulièrement valorisée pour exploiter le plein potentiel du cloud.",
+      definition: "Expert en solutions d'infrastructure distribuée et services cloud, l'architecte cloud conçoit des architectures évolutives, résilientes et optimisées pour le cloud.",
+      activites: [
+        { 
+          nom: "Design d'architecture cloud", 
+          description: "Conception d'infrastructures cloud natives multi-tenants et hautement disponibles" 
+        },
+        { 
+          nom: "Optimisation des coûts", 
+          description: "Analyse et rationalisation des dépenses liées aux services cloud (FinOps)" 
+        },
+        { 
+          nom: "Automatisation de l'infrastructure", 
+          description: "Mise en place de l'Infrastructure as Code et des pipelines d'automatisation" 
+        },
+        { 
+          nom: "Stratégie multi-cloud", 
+          description: "Définition et mise en œuvre de stratégies d'orchestration multi-fournisseurs cloud" 
+        },
+        { 
+          nom: "Sécurisation des environnements", 
+          description: "Implémentation des mécanismes de sécurité spécifiques aux environnements cloud" 
+        }
+      ],
+      competences: [
+        { name: "Services managés IA", value: 95 },
+        { name: "Optimisation coûts", value: 85 },
+        { name: "Multi-cloud", value: 80 },
+        { name: "Infrastructure as Code", value: 75 },
+        { name: "Sécurité cloud", value: 85 }
+      ],
+      taches: [
+        { name: "Design d'infrastructure", valeur: 45 },
+        { name: "Scripts IaC", valeur: 60 },
+        { name: "Optimisation ressources", valeur: 35 },
+        { name: "Documentation cloud", valeur: 70 },
+        { name: "Audits de sécurité", valeur: 30 }
+      ]
     }
   ];
   
@@ -113,6 +201,16 @@ const ArchitectesImpact = () => {
       { year: "2 ans", augmentation: 55, autoTaches: 40, reductionETP: 30 },
       { year: "5 ans", augmentation: 70, autoTaches: 55, reductionETP: 45 },
       { year: "10 ans", augmentation: 85, autoTaches: 65, reductionETP: 50 }
+    ],
+    Système: [
+      { year: "2 ans", augmentation: 60, autoTaches: 30, reductionETP: 20 },
+      { year: "5 ans", augmentation: 75, autoTaches: 45, reductionETP: 30 },
+      { year: "10 ans", augmentation: 85, autoTaches: 55, reductionETP: 35 }
+    ],
+    Cloud: [
+      { year: "2 ans", augmentation: 70, autoTaches: 45, reductionETP: 15 },
+      { year: "5 ans", augmentation: 85, autoTaches: 60, reductionETP: 25 },
+      { year: "10 ans", augmentation: 95, autoTaches: 70, reductionETP: 30 }
     ]
   };
 
@@ -131,6 +229,20 @@ const ArchitectesImpact = () => {
       "Design de microservices pour systèmes IA",
       "CI/CD pour applications IA",
       "Architecture event-driven pour systèmes prédictifs"
+    ],
+    Système: [
+      "Infrastructure optimisée pour l'IA",
+      "Scalabilité des systèmes à forte charge computationnelle",
+      "Monitoring et observabilité avancés",
+      "Orchestration de conteneurs pour workloads IA",
+      "Systèmes distribués pour l'inférence IA"
+    ],
+    Cloud: [
+      "Services managés d'IA dans le cloud",
+      "Optimisation des coûts d'inférence et d'entraînement",
+      "Architecture multi-cloud pour l'IA",
+      "Infrastructure as Code avancée",
+      "Sécurisation des environnements cloud d'IA"
     ]
   };
   

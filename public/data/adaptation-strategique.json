@@ -1,0 +1,67 @@
+{
+  "modeleEconomique": [
+    "Passage du TJM à la facturation à la valeur",
+    "Développement d'offres d'IA as a Service",
+    "Création d'actifs propriétaires réutilisables",
+    "Investissement dans la R&D et l'innovation (3-5% du CA)"
+  ],
+  "projections": [
+    { "label": "Réduction marges prestations classiques", "value": "-5 à -10 points" },
+    { "label": "Croissance activités à forte valeur", "value": "+10 à +15% annuels" },
+    { "label": "Période de transition", "value": "2024-2027" },
+    { "label": "Requalification des effectifs", "value": "80% d'ici 2027" }
+  ],
+  "facteursCles": [
+    {
+      "titre": "Création de valeur",
+      "description": "Développer des offres basées sur la valeur livrée plutôt que sur le temps passé",
+      "importance": "critique"
+    },
+    {
+      "titre": "Expertise technique",
+      "description": "Maîtriser les plateformes IA leaders et développer des compétences spécialisées",
+      "importance": "élevée"
+    },
+    {
+      "titre": "Innovation",
+      "description": "Investir dans la R&D pour créer des solutions propriétaires et différenciantes",
+      "importance": "élevée"
+    },
+    {
+      "titre": "Adaptation des talents",
+      "description": "Requalifier les équipes existantes et attirer les profils hybrides technique/métier",
+      "importance": "critique"
+    },
+    {
+      "titre": "Partenariats stratégiques",
+      "description": "S'allier avec les fournisseurs de technologies IA pour accélérer l'innovation",
+      "importance": "moyenne"
+    }
+  ],
+  "etapesTransformation": [
+    {
+      "phase": "Phase 1: Exploration (6-12 mois)",
+      "actions": [
+        "Identification des cas d'usage pertinents",
+        "Formation initiale des équipes clés",
+        "Partenariats avec les fournisseurs de technologies"
+      ]
+    },
+    {
+      "phase": "Phase 2: Industrialisation (12-24 mois)",
+      "actions": [
+        "Développement de méthodologies adaptées",
+        "Création des premiers actifs propriétaires",
+        "Requalification des effectifs à grande échelle"
+      ]
+    },
+    {
+      "phase": "Phase 3: Transformation (24-36 mois)",
+      "actions": [
+        "Refonte du modèle économique",
+        "Spécialisation par secteur/expertise",
+        "Création d'offres innovantes basées sur l'IA"
+      ]
+    }
+  ]
+}

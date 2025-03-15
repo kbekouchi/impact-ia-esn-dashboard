@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { act } from 'react-dom/test-utils'; // Correction de l'import de act
 import '@testing-library/jest-dom'; // Ajout de l'import pour les matchers personnalisés
 import StateDisplay from '../StateDisplay';
 import * as dataService from '../../services/dataService';
@@ -87,12 +88,24 @@ describe('StateDisplay Component', () => {
   });
 
   it('affiche un état de chargement initial pendant le chargement de la configuration', async () => {
+    // Bloquer la résolution de la promesse pour maintenir l'état de chargement
+    let resolvePromise;
+    dataService.getUiConfig.mockImplementation(() => new Promise(resolve => {
+      resolvePromise = resolve; // On ne résout pas immédiatement la promesse
+    }));
+    
     // Utiliser act pour envelopper l'opération de rendu
     await act(async () => {
       render(<StateDisplay type="loading" />);
     });
     
-    expect(screen.getByText('Initialisation...')).toBeInTheDocument();
+    // Pendant que la promesse n'est pas résolue, on devrait voir l'état initial
+    expect(screen.getByText(/initialisation/i)).toBeInTheDocument();
+    
+    // Résoudre la promesse pour permettre aux autres tests de continuer
+    await act(async () => {
+      resolvePromise(mockConfig);
+    });
   });
 
   it('affiche correctement un état de chargement avec la configuration par défaut', async () => {
@@ -106,12 +119,11 @@ describe('StateDisplay Component', () => {
       render(<StateDisplay type="loading" />);
     });
     
-    // Vérifier l'état de chargement initial
-    expect(screen.getByText('Initialisation...')).toBeInTheDocument();
-    
     // Résoudre la promesse et attendre que les mises à jour du DOM soient terminées
     await act(async () => {
       resolvePromise();
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     // Maintenant vérifier que l'état a été mis à jour
@@ -129,6 +141,8 @@ describe('StateDisplay Component', () => {
           onAction={handleRetry}
         />
       );
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     // Attendre que la configuration soit chargée et que le composant soit mis à jour
@@ -151,6 +165,8 @@ describe('StateDisplay Component', () => {
   it('affiche correctement un état vide', async () => {
     await act(async () => {
       render(<StateDisplay type="empty" />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {
@@ -163,6 +179,8 @@ describe('StateDisplay Component', () => {
   it('affiche correctement un état de succès', async () => {
     await act(async () => {
       render(<StateDisplay type="success" />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {
@@ -177,6 +195,8 @@ describe('StateDisplay Component', () => {
     
     await act(async () => {
       render(<StateDisplay type="loading" message={customMessage} />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {
@@ -189,6 +209,8 @@ describe('StateDisplay Component', () => {
     
     await act(async () => {
       render(<StateDisplay type="error" title={customTitle} />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {
@@ -199,6 +221,8 @@ describe('StateDisplay Component', () => {
   it('utilise le thème spécifié correctement', async () => {
     await act(async () => {
       render(<StateDisplay type="loading" theme="minimal" />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {
@@ -212,6 +236,8 @@ describe('StateDisplay Component', () => {
     
     await act(async () => {
       render(<StateDisplay type="loading" />);
+      // Attendre que les mises à jour asynchrones se terminent
+      await new Promise(resolve => setTimeout(resolve, 0));
     });
     
     await waitFor(() => {

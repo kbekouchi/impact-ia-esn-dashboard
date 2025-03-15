@@ -10,9 +10,9 @@ const Dashboard = () => {
   const [data, setData] = useState({
     stats: {
       reductionEtp: { value: 63, unit: '%', description: 'Réduction moyenne des effectifs sur les métiers impactés', color: 'red' },
-      productiviteDev: { value: 55, unit: '%', description: 'Gain de productivité des développeurs avec l\\'IA', color: 'green', prefix: '+' },
+      productiviteDev: { value: 55, unit: '%', description: "Gain de productivité des développeurs avec l'IA", color: 'green', prefix: '+' },
       budgetsIa: { value: 81, unit: '%', description: 'Entreprises augmentant leur budget IA', color: 'blue', prefix: '+' },
-      requalification: { value: 80, unit: '%', description: 'Effectifs à requalifier d\\'ici 2027', color: 'purple' }
+      requalification: { value: 80, unit: '%', description: "Effectifs à requalifier d'ici 2027", color: 'purple' }
     },
     etpComparaison: [],
     budgetData: [],

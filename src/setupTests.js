@@ -1,5 +1,7 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toBeInTheDocument();
-// learn more: https://github.com/testing-library/jest-dom
+// Fichier: src/setupTests.js
+// Import nécessaire pour les matchers comme toBeInTheDocument()
 import '@testing-library/jest-dom';
+import { configure } from '@testing-library/react';
+
+// Configuration globale pour les tests
+configure({ testIdAttribute: 'data-testid' });

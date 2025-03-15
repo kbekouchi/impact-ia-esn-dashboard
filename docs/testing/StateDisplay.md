@@ -4,7 +4,7 @@ Ce document explique les bonnes pratiques pour tester le composant `StateDisplay
 
 ## Problèmes résolus
 
-Lors des tests du composant `StateDisplay`, nous avons rencontré deux problèmes :
+Lors des tests du composant `StateDisplay`, nous avons rencontré trois problèmes :
 
 1. L'avertissement "not wrapped in act(...)":
 
@@ -18,13 +18,22 @@ Warning: An update to StateDisplay inside a test was not wrapped in act(...)
 Warning: `ReactDOMTestUtils.act` is deprecated in favor of `React.act`. Import `act` from `react` instead of `react-dom/test-utils`. See https://react.dev/warnings/react-dom-test-utils for more info.
 ```
 
-Ces avertissements se produisent lorsque React effectue des mises à jour d'état pendant les tests qui ne sont pas correctement gérées dans la configuration du test ou lorsqu'on utilise des API dépréciées.
+3. Des erreurs de console lors du test du scénario d'erreur:
+
+```
+console.error
+    Erreur lors du chargement de la configuration StateDisplay: Error: Erreur de chargement config
+```
+
+Ces problèmes affectent la clarté des résultats de test et peuvent masquer d'autres problèmes réels.
 
 ## Cause des problèmes
 
 1. Le composant `StateDisplay` utilise `useEffect` pour charger la configuration de façon asynchrone via `getUiConfig()`. Dans les tests, ces mises à jour d'état asynchrones n'étaient pas correctement encapsulées, ce qui provoquait des avertissements car React Testing Library n'était pas en mesure de suivre ces changements d'état.
 
 2. L'import de `act` depuis '@testing-library/react' est déprécié, car il utilise en interne la fonction depuis 'react-dom/test-utils' qui est elle-même dépréciée.
+
+3. Le test qui simule une erreur de chargement provoque intentionnellement une erreur lors de l'appel à `getUiConfig()`. Cette erreur est correctement gérée par le composant mais est affichée dans la console, ce qui peut être distrayant lors de l'exécution des tests.
 
 ## Solutions
 
@@ -49,36 +58,28 @@ import { act } from 'react-dom/test-utils';
 import { act } from 'react';
 ```
 
-### Exemple de correctifs
+### 3. Pour les erreurs de console lors des tests
+
+La solution consiste à utiliser `jest.spyOn` pour masquer temporairement les erreurs de console pendant les tests où nous nous attendons à ce que des erreurs se produisent:
 
 ```javascript
-// Avant
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+// Dans le beforeEach
+jest.spyOn(console, 'error').mockImplementation(() => {});
 
-it('affiche un état de chargement initial pendant le chargement de la configuration', () => {
-    render(<StateDisplay type="loading" />);
-    expect(screen.getByText('Initialisation...')).toBeInTheDocument();
+// Dans le afterEach
+console.error.mockRestore();
+
+// Ou spécifiquement dans un test
+it('test avec erreur attendue', () => {
+  // Masquer temporairement l'erreur de console pendant ce test
+  const originalConsoleError = console.error;
+  console.error = jest.fn();
+  
+  // ... test qui génère une erreur ...
+  
+  // Restaurer console.error
+  console.error = originalConsoleError;
 });
-
-// Après
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-
-it('affiche un état de chargement initial pendant le chargement de la configuration', async () => {
-    // Bloquer la résolution de la promesse pour maintenir l'état de chargement
-    let resolvePromise;
-    dataService.getUiConfig.mockImplementation(() => new Promise(resolve => {
-      resolvePromise = resolve; // On ne résout pas immédiatement la promesse
-    }));
-    
-    // Utiliser act pour envelopper l'opération de rendu
-    await act(async () => {
-      render(<StateDisplay type="loading" />);
-    });
-    
-    // Pendant que la promesse n'est pas résolue, on devrait voir l'état initial
-    expect(screen.getByText(/initialisation/i)).toBeInTheDocument();
-}
 ```
 
 ## Bonnes pratiques pour tester des composants avec des opérations asynchrones
@@ -111,9 +112,28 @@ it('affiche un état de chargement initial pendant le chargement de la configura
 
 5. **Utiliser `waitFor` pour des conditions complexes** : Utilisez `waitFor()` lorsque vous avez besoin d'attendre qu'une condition spécifique soit remplie avant de continuer
 
+6. **Masquer les erreurs de console attendues** : Pour les tests qui vont intentionnellement provoquer des erreurs, masquez les sorties de console pour garder les résultats de test propres:
+
+   ```javascript
+   // Avant le test
+   jest.spyOn(console, 'error').mockImplementation(() => {});
+   
+   // Après le test
+   console.error.mockRestore();
+   ```
+
+7. **Augmenter les timeouts pour les tests complexes** : Pour les tests qui incluent plusieurs opérations asynchrones, augmentez le timeout pour éviter les échecs de test prématurés:
+
+   ```javascript
+   await waitFor(() => {
+     expect(element).toBeInTheDocument();
+   }, { timeout: 2000 }); // Défaut: 1000ms
+   ```
+
 ## Ressources utiles
 
 - [Documentation Testing Library sur act()](https://testing-library.com/docs/react-testing-library/api/#act)
 - [Guide React sur le test avec act()](https://reactjs.org/docs/test-utils.html#act)
 - [Problèmes courants avec les tests asynchrones](https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning)
 - [Migration des tests ReactDOM](https://react.dev/warnings/react-dom-test-utils) - Guide officiel pour migrer depuis react-dom/test-utils
+- [Documentation Jest sur les mocks](https://jestjs.io/fr/docs/mock-functions)

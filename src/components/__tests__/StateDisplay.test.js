@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Ajout de l'import pour les matchers personnalisés
 import StateDisplay from '../StateDisplay';
 import * as dataService from '../../services/dataService';
 

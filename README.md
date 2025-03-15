@@ -9,6 +9,7 @@ Dashboard stratégique présentant l'impact de l'IA générative et agentique su
 - Analyse détaillée de l'impact sur les architectes
 - Stratégies d'adaptation recommandées
 - Comparaison de productivité entre l'IA et le développement humain
+- Affichages d'état configurables (chargement, erreur, vide, succès)
 
 ## Structure du projet
 
@@ -28,10 +29,15 @@ Le projet est structuré comme suit :
 │   └── index.html
 ├── src/
 │   ├── components/   # Composants réutilisables
+│   │   ├── StateDisplay.js  # Composant d'affichage d'état configurable
+│   │   ├── InfoCard.js
+│   │   └── StatCard.js
 │   ├── data/         # Fichiers de données (fallback)
 │   ├── pages/        # Pages de l'application
 │   ├── services/     # Services d'accès aux données
 │   └── App.js        # Point d'entrée de l'application
+├── docs/             # Documentation du projet
+│   └── StateDisplay.md  # Guide d'utilisation des affichages d'état
 └── scripts/
     └── generateJsonData.js  # Script de génération des fichiers JSON
 ```
@@ -45,8 +51,38 @@ L'application utilise une architecture de données externalisées pour faciliter
 - **Données spécifiques aux pages** : `dashboard-data.json`, etc.
 - **Messages d'erreur** : `error-messages.json`
 - **Configuration des graphiques** : `charts-config.json`
+- **Configuration des affichages d'état** : Section dans `ui-config.json`
 
 En cas d'échec de chargement des fichiers JSON, l'application dispose d'un mécanisme de fallback sur les données en dur définies dans le dossier `src/data/`.
+
+## Composants réutilisables
+
+### StateDisplay
+
+Le composant `StateDisplay` permet d'afficher de manière cohérente les différents états de l'application (chargement, erreur, vide, succès). Son apparence est entièrement configurable via `ui-config.json`.
+
+```jsx
+// Exemple d'utilisation
+import StateDisplay from '../components/StateDisplay';
+
+// Affichage d'un état de chargement
+<StateDisplay type="loading" />
+
+// Affichage d'une erreur avec action
+<StateDisplay 
+  type="error" 
+  theme="card"
+  onAction={() => window.location.reload()} 
+/>
+
+// Affichage d'un état vide avec message personnalisé
+<StateDisplay 
+  type="empty" 
+  message="Aucune donnée disponible pour cette section" 
+/>
+```
+
+Pour plus de détails, consultez la [documentation complète](./docs/StateDisplay.md).
 
 ## Génération des fichiers JSON
 

@@ -1,3 +1,6 @@
+
+// Ceci est juste pour permettre la fusion (il n'y a pas de fonction directe de fusion PR)
+=======
 # Impact de l'IA sur les ESN - Dashboard
 
 Dashboard interactif présentant l'impact de l'IA sur les métiers des ESN et l'évolution nécessaire du modèle d'affaires.
@@ -71,3 +74,4 @@ impact-ia-esn-dashboard/
 ## Contribution
 
 Toute contribution est la bienvenue. Veuillez ouvrir une issue pour discuter des modifications importantes avant de soumettre une pull request.
+

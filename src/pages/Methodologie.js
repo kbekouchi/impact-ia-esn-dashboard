@@ -1,14 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfoCard from '../components/InfoCard';
+import StateDisplay from '../components/StateDisplay';
 // Importation du service de données au lieu des données directement
 import { getSourcesList, getMethodologie } from '../services/dataService';
 
 const Methodologie = () => {
-  // Récupération des données via le service
-  const sourcesList = getSourcesList();
-  const methodologie = getMethodologie();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [data, setData] = useState({
+    sourcesList: [],
+    methodologie: {}
+  });
   
   const [expandedCategory, setExpandedCategory] = useState(null);
+
+  useEffect(() => {
+    try {
+      setLoading(true);
+      
+      // Récupération des données via le service
+      const sourcesList = getSourcesList();
+      const methodologie = getMethodologie();
+      
+      setData({
+        sourcesList,
+        methodologie
+      });
+      
+      setError(false);
+    } catch (err) {
+      console.error("Erreur lors du chargement des données méthodologiques:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const toggleCategory = (category) => {
     if (expandedCategory === category) {
@@ -17,6 +43,39 @@ const Methodologie = () => {
       setExpandedCategory(category);
     }
   };
+
+  // Gestion du rechargement de la page en cas d'erreur
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
+  // Rendu pendant le chargement
+  if (loading) {
+    return <StateDisplay type="loading" theme="default" message="Chargement de la méthodologie et des sources..." />;
+  }
+
+  // Rendu en cas d'erreur
+  if (error) {
+    return (
+      <StateDisplay 
+        type="error" 
+        theme="card"
+        message="Impossible de charger les informations sur la méthodologie et les sources."
+        onAction={handleRetry}
+      />
+    );
+  }
+
+  // Vérification si les données sont vides
+  if (!data.sourcesList || data.sourcesList.length === 0) {
+    return (
+      <StateDisplay 
+        type="empty" 
+        theme="default" 
+        message="Aucune information disponible sur la méthodologie et les sources."
+      />
+    );
+  }
 
   return (
     <div className="space-y-8">
@@ -66,56 +125,80 @@ const Methodologie = () => {
       {/* Sources bibliographiques */}
       <div>
         <h2 className="text-2xl font-bold mb-6">Sources bibliographiques</h2>
-        <div className="space-y-6">
-          {sourcesList.map((category, index) => (
-            <InfoCard 
-              key={index} 
-              title={
-                <button 
-                  className="flex justify-between items-center w-full"
-                  onClick={() => toggleCategory(category.category)}
-                >
-                  <span>{category.category}</span>
-                  <span className="text-sm text-primary-600">
-                    {expandedCategory === category.category ? "Réduire" : "Détails"}
-                  </span>
-                </button>
-              } 
-              bgColor="gray"
-            >
-              {expandedCategory === category.category ? (
-                <div className="mt-2 space-y-6">
-                  {category.sources.map((source, sourceIndex) => (
-                    <div key={sourceIndex} className="border-b pb-4 last:border-b-0 last:pb-0">
-                      <h3 className="font-semibold text-gray-800">{source.title} ({source.year})</h3>
-                      <a 
-                        href={source.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-primary-600 text-sm hover:underline"
-                      >
-                        {source.url}
-                      </a>
-                      <div className="mt-2">
-                        <p className="text-sm font-medium text-gray-700">Données clés :</p>
-                        <ul className="list-disc pl-6 mt-1 space-y-1 text-sm text-gray-600">
-                          {source.key_data.map((data, dataIndex) => (
-                            <li key={dataIndex}>{data}</li>
-                          ))}
-                        </ul>
-                      </div>
+        {data.sourcesList && data.sourcesList.length > 0 ? (
+          <div className="space-y-6">
+            {data.sourcesList.map((category, index) => (
+              <InfoCard 
+                key={index} 
+                title={
+                  <button 
+                    className="flex justify-between items-center w-full"
+                    onClick={() => toggleCategory(category.category)}
+                  >
+                    <span>{category.category}</span>
+                    <span className="text-sm text-primary-600">
+                      {expandedCategory === category.category ? "Réduire" : "Détails"}
+                    </span>
+                  </button>
+                } 
+                bgColor="gray"
+              >
+                {expandedCategory === category.category ? (
+                  category.sources && category.sources.length > 0 ? (
+                    <div className="mt-2 space-y-6">
+                      {category.sources.map((source, sourceIndex) => (
+                        <div key={sourceIndex} className="border-b pb-4 last:border-b-0 last:pb-0">
+                          <h3 className="font-semibold text-gray-800">{source.title} ({source.year})</h3>
+                          <a 
+                            href={source.url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-primary-600 text-sm hover:underline"
+                          >
+                            {source.url}
+                          </a>
+                          <div className="mt-2">
+                            <p className="text-sm font-medium text-gray-700">Données clés :</p>
+                            {source.key_data && source.key_data.length > 0 ? (
+                              <ul className="list-disc pl-6 mt-1 space-y-1 text-sm text-gray-600">
+                                {source.key_data.map((data, dataIndex) => (
+                                  <li key={dataIndex}>{data}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <StateDisplay 
+                                type="empty" 
+                                theme="minimal" 
+                                message="Aucune donnée clé disponible" 
+                              />
+                            )}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-700">
-                  {category.sources.length} source{category.sources.length > 1 ? 's' : ''} - 
-                  Cliquez sur "Détails" pour voir les références complètes.
-                </p>
-              )}
-            </InfoCard>
-          ))}
-        </div>
+                  ) : (
+                    <StateDisplay 
+                      type="empty" 
+                      theme="minimal" 
+                      message="Aucune source disponible dans cette catégorie" 
+                    />
+                  )
+                ) : (
+                  <p className="text-gray-700">
+                    {category.sources ? `${category.sources.length} source${category.sources.length > 1 ? 's' : ''} - ` : ''}
+                    Cliquez sur "Détails" pour voir les références complètes.
+                  </p>
+                )}
+              </InfoCard>
+            ))}
+          </div>
+        ) : (
+          <StateDisplay 
+            type="empty" 
+            theme="default" 
+            message="Aucune source bibliographique disponible" 
+          />
+        )}
       </div>
 
       {/* Limitations de l'étude */}

@@ -73,3 +73,48 @@ Ce problème se produit lorsque vous utilisez une expression régulière qui cor
    const elements = screen.getAllByText(/chargement/i);
    expect(elements.length).toBe(2);
    ```
+
+## Problème : `Warning: An update to Component inside a test was not wrapped in act(...)`
+
+### Symptômes
+```
+Warning: An update to StateDisplay inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser.
+```
+
+### Causes
+Ce problème se produit lorsque des mises à jour d'état React se produisent en dehors d'un bloc `act()`. React attend que toutes les mises à jour d'état soient enveloppées dans `act()` pour garantir que les tests reflètent fidèlement ce que l'utilisateur verrait.
+
+### Solutions
+
+1. **Envelopper le rendu des composants avec act()**
+
+   ```javascript
+   import { act } from '@testing-library/react';
+   
+   it('test something', async () => {
+     await act(async () => {
+       render(<MyComponent />);
+     });
+     
+     // Assertions...
+   });
+   ```
+
+2. **Envelopper les événements avec act()**
+
+   ```javascript
+   const button = screen.getByText('Cliquez-moi');
+   
+   await act(async () => {
+     fireEvent.click(button);
+   });
+   ```

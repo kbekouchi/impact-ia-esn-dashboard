@@ -115,3 +115,21 @@ loading: {
   }
 }
 ```
+
+### Ajout d'un nouveau thème
+
+Pour ajouter un nouveau thème, ajoutez une nouvelle entrée dans la section `themes` :
+
+```javascript
+themes: {
+  default: { /* ... */ },
+  minimal: { /* ... */ },
+  card: { // Nouveau thème "card"
+    container: 'flex flex-col items-center justify-center rounded-lg shadow-md p-6',
+    iconWrapper: 'mb-3',
+    title: 'text-xl font-bold text-gray-800',
+    message: 'text-base text-gray-600 text-center',
+    action: 'mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+  }
+}
+```

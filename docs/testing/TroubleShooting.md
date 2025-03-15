@@ -118,3 +118,61 @@ Ce problème se produit lorsque des mises à jour d'état React se produisent en
      fireEvent.click(button);
    });
    ```
+
+3. **Pour les états de chargement transitoires**
+
+   Si vous voulez tester un état qui n'apparaît que pendant le chargement, vous pouvez bloquer la résolution des promesses :
+   
+   ```javascript
+   // Empêcher la résolution de la promesse
+   service.fetchData.mockImplementation(() => new Promise(() => {}));
+   
+   render(<MyComponent />);
+   
+   // L'état de chargement restera visible
+   expect(screen.getByText('Chargement...')).toBeInTheDocument();
+   ```
+
+## Problème : Messages d'erreur dans la console pendant les tests
+
+### Symptômes
+```
+console.error
+  Erreur lors du chargement de la configuration: Error: Erreur de chargement config
+```
+
+### Causes
+Des erreurs dans la console peuvent être attendues dans certains tests, par exemple lorsque vous testez le comportement en cas d'erreur.
+
+### Solutions
+
+1. **Utiliser un mock pour console.error**
+
+   ```javascript
+   let originalConsoleError;
+   
+   beforeAll(() => {
+     originalConsoleError = console.error;
+     console.error = jest.fn();
+   });
+   
+   afterAll(() => {
+     console.error = originalConsoleError;
+   });
+   ```
+
+2. **Vérifier que l'erreur a été correctement journalisée**
+
+   ```javascript
+   expect(console.error).toHaveBeenCalledWith(
+     'Erreur lors du chargement de la configuration:',
+     expect.any(Error)
+   );
+   ```
+
+## Ressources supplémentaires
+
+- [React Testing Library - Documentation officielle](https://testing-library.com/docs/react-testing-library/intro/)
+- [Jest DOM - Documentation officielle](https://github.com/testing-library/jest-dom)
+- [Guide React sur les tests avec act()](https://reactjs.org/docs/test-utils.html#act)
+- [Guide de Kent C. Dodds sur les tests React](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)

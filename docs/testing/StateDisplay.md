@@ -83,3 +83,35 @@ loading: {
   }
 }
 ```
+
+## Comment modifier les données de test
+
+### Modification d'un thème existant
+
+Pour modifier un thème existant, localisez la section correspondante dans l'objet `mockConfig` et modifiez les propriétés souhaitées :
+
+```javascript
+themes: {
+  default: {
+    container: 'flex flex-col items-center justify-center p-4', // Ajout de padding
+    iconWrapper: 'mb-6', // Augmentation de la marge inférieure
+    // Autres propriétés...
+  }
+}
+```
+
+### Modification d'un état existant
+
+Pour modifier un état existant, localisez la section correspondante et modifiez les propriétés :
+
+```javascript
+loading: {
+  default: {
+    icon: 'FaSpinner',
+    iconClass: 'animate-spin text-indigo-600', // Changement de couleur
+    title: 'Chargement en cours...', // Modification du titre
+    message: 'Veuillez patienter', // Modification du message
+    containerClass: 'bg-indigo-50' // Changement de couleur d'arrière-plan
+  }
+}
+```

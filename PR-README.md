@@ -51,3 +51,80 @@ Des tests unitaires ont été ajoutés :
 - ✅ Réduction de la duplication de code
 - ✅ Possibilité de créer des thèmes différents pour les états
 - ✅ Meilleure gestion des états de chargement/erreur dans toutes les pages
+
+## Comparaison avant/après
+
+### Avant
+
+```jsx
+// Exemple de code pour un état de chargement avant cette PR
+{loading && (
+  <div className="flex items-center justify-center h-64">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-4"></div>
+      <p>Chargement du dashboard...</p>
+    </div>
+  </div>
+)}
+
+// Exemple de code pour une erreur avant cette PR
+{error && (
+  <div className="flex items-center justify-center h-64">
+    <div className="text-center text-red-600">
+      <FaExclamationTriangle className="text-4xl mx-auto mb-4" />
+      <h2 className="text-xl font-bold mb-2">Erreur de chargement</h2>
+      <p>Impossible de charger les données du dashboard.</p>
+      <button 
+        onClick={() => window.location.reload()} 
+        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+      >
+        Réessayer
+      </button>
+    </div>
+  </div>
+)}
+```
+
+### Après
+
+```jsx
+// Exemple de code pour un état de chargement après cette PR
+{loading && <StateDisplay type="loading" />}
+
+// Exemple de code pour une erreur après cette PR
+{error && (
+  <StateDisplay 
+    type="error" 
+    theme="card"
+    onAction={handleRetry}
+  />
+)}
+
+// Exemple de code pour un état vide après cette PR
+{emptyData && (
+  <StateDisplay 
+    type="empty" 
+    message="Aucune donnée disponible pour cette section" 
+  />
+)}
+```
+
+## Modifications à effectuer avant la fusion
+
+- [x] Standardiser les affichages d'état dans les pages principales
+- [x] Ajouter des tests pour les cas d'utilisation
+- [x] Mettre à jour le README principal
+- [x] Mettre à jour d'autres pages (BenchmarksEconomiques.js, Methodologie.js)
+
+## Comment tester
+
+1. Exécuter `npm test` pour vérifier que les tests unitaires passent
+2. Lancer l'application avec `npm start`
+3. Tester différents scénarios :
+   - Simuler un chargement en ralentissant la connexion réseau dans les outils de développement
+   - Simuler une erreur en bloquant certaines requêtes
+   - Vérifier les états vides en vidant des tableaux de données dans la console
+
+## Notes supplémentaires
+
+Cette PR complète tous les critères d'acceptation définis dans l'issue #46, en s'appuyant sur l'externalisation des données déjà réalisée dans l'issue #37.

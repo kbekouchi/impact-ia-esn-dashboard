@@ -1,5 +1,4 @@
-// Fichier: src/setupTests.js
-// Import nécessaire pour les matchers comme toBeInTheDocument()
+// Configuration pour les tests Jest
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/react';
 

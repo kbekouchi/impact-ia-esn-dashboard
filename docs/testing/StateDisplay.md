@@ -46,3 +46,40 @@ const mockConfig = {
   }
 };
 ```
+
+### Configuration des thèmes
+
+Chaque thème définit les classes CSS à utiliser pour les différents éléments du composant :
+
+```javascript
+default: {
+  container: 'flex flex-col items-center justify-center', // Classes pour le conteneur
+  iconWrapper: 'mb-4', // Classes pour le wrapper d'icône
+  title: 'text-lg font-bold', // Classes pour le titre
+  message: 'text-base text-center', // Classes pour le message
+  action: 'bg-blue-600 text-white' // Classes pour le bouton d'action
+}
+```
+
+### Configuration des états
+
+Chaque état peut avoir plusieurs configurations selon le thème :
+
+```javascript
+loading: {
+  default: {
+    icon: 'FaSpinner', // Nom de l'icône à utiliser
+    iconClass: 'animate-spin text-blue-600', // Classes CSS pour l'icône
+    title: 'Chargement test', // Titre à afficher
+    message: 'Message de chargement test', // Message à afficher
+    containerClass: 'bg-blue-50' // Classes supplémentaires pour le conteneur
+  },
+  minimal: {
+    // Configuration pour le thème minimal
+    icon: 'FaSpinner',
+    iconClass: 'animate-spin',
+    message: 'Chargement minimal...',
+    containerClass: 'bg-blue-50'
+  }
+}
+```

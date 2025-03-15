@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/jest-dom'; // Ajout de l'import pour les matchers personnalisés
 import StateDisplay from '../StateDisplay';
 import * as dataService from '../../services/dataService';
@@ -86,13 +86,18 @@ describe('StateDisplay Component', () => {
     dataService.getUiConfig.mockResolvedValue(mockConfig);
   });
 
-  it('affiche un état de chargement initial pendant le chargement de la configuration', () => {
-    render(<StateDisplay type="loading" />);
+  // Wrapping les tests avec act() pour gérer les mises à jour d'état React
+  it('affiche un état de chargement initial pendant le chargement de la configuration', async () => {
+    await act(async () => {
+      render(<StateDisplay type="loading" />);
+    });
     expect(screen.getByText('Initialisation...')).toBeInTheDocument();
   });
 
   it('affiche correctement un état de chargement avec la configuration par défaut', async () => {
-    render(<StateDisplay type="loading" />);
+    await act(async () => {
+      render(<StateDisplay type="loading" />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText('Chargement test')).toBeInTheDocument();
@@ -104,12 +109,14 @@ describe('StateDisplay Component', () => {
   it('affiche correctement un état d\'erreur avec action', async () => {
     const handleRetry = jest.fn();
     
-    render(
-      <StateDisplay 
-        type="error" 
-        onAction={handleRetry}
-      />
-    );
+    await act(async () => {
+      render(
+        <StateDisplay 
+          type="error" 
+          onAction={handleRetry}
+        />
+      );
+    });
     
     await waitFor(() => {
       expect(screen.getByText('Erreur test')).toBeInTheDocument();
@@ -120,12 +127,16 @@ describe('StateDisplay Component', () => {
     const actionButton = screen.getByText('Réessayer test');
     expect(actionButton).toBeInTheDocument();
     
-    fireEvent.click(actionButton);
+    await act(async () => {
+      fireEvent.click(actionButton);
+    });
     expect(handleRetry).toHaveBeenCalledTimes(1);
   });
 
   it('affiche correctement un état vide', async () => {
-    render(<StateDisplay type="empty" />);
+    await act(async () => {
+      render(<StateDisplay type="empty" />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText('Vide test')).toBeInTheDocument();
@@ -135,7 +146,9 @@ describe('StateDisplay Component', () => {
   });
 
   it('affiche correctement un état de succès', async () => {
-    render(<StateDisplay type="success" />);
+    await act(async () => {
+      render(<StateDisplay type="success" />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText('Succès test')).toBeInTheDocument();
@@ -147,7 +160,9 @@ describe('StateDisplay Component', () => {
   it('permet de personnaliser le message', async () => {
     const customMessage = "Message personnalisé de test";
     
-    render(<StateDisplay type="loading" message={customMessage} />);
+    await act(async () => {
+      render(<StateDisplay type="loading" message={customMessage} />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText(customMessage)).toBeInTheDocument();
@@ -157,7 +172,9 @@ describe('StateDisplay Component', () => {
   it('permet de personnaliser le titre', async () => {
     const customTitle = "Titre personnalisé";
     
-    render(<StateDisplay type="error" title={customTitle} />);
+    await act(async () => {
+      render(<StateDisplay type="error" title={customTitle} />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText(customTitle)).toBeInTheDocument();
@@ -165,7 +182,9 @@ describe('StateDisplay Component', () => {
   });
 
   it('utilise le thème spécifié correctement', async () => {
-    render(<StateDisplay type="loading" theme="minimal" />);
+    await act(async () => {
+      render(<StateDisplay type="loading" theme="minimal" />);
+    });
     
     await waitFor(() => {
       expect(screen.getByText('Chargement minimal...')).toBeInTheDocument();
@@ -176,7 +195,9 @@ describe('StateDisplay Component', () => {
     // Simuler une erreur lors du chargement de la configuration
     dataService.getUiConfig.mockRejectedValue(new Error('Erreur de chargement config'));
     
-    render(<StateDisplay type="loading" />);
+    await act(async () => {
+      render(<StateDisplay type="loading" />);
+    });
     
     await waitFor(() => {
       // Les valeurs fallback sont différentes des valeurs de test

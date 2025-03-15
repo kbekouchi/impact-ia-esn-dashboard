@@ -10,6 +10,21 @@ jest.mock('../../services/dataService', () => ({
 }));
 
 describe('StateDisplay Component', () => {
+  // Capturer et supprimer les messages d'erreur dans la console pendant les tests
+  let originalConsoleError;
+  
+  beforeAll(() => {
+    // Sauvegarder la fonction console.error originale
+    originalConsoleError = console.error;
+    // Remplacer par une fonction vide pour les tests
+    console.error = jest.fn();
+  });
+  
+  afterAll(() => {
+    // Restaurer la fonction console.error originale après les tests
+    console.error = originalConsoleError;
+  });
+
   // Configuration de test
   const mockConfig = {
     components: {
@@ -209,5 +224,11 @@ describe('StateDisplay Component', () => {
       // Utilisons le titre spécifique plutôt qu'une expression régulière
       expect(screen.getByText('Chargement en cours')).toBeInTheDocument();
     });
+    
+    // Vérifier que console.error a été appelé avec le bon message d'erreur
+    expect(console.error).toHaveBeenCalledWith(
+      'Erreur lors du chargement de la configuration StateDisplay:',
+      expect.any(Error)
+    );
   });
 });

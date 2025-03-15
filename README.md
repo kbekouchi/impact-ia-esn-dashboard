@@ -1,91 +1,73 @@
-# Impact IA ESN Dashboard
+# Impact de l'IA sur les ESN - Dashboard
 
-Dashboard stratégique présentant l'impact de l'IA générative et agentique sur les métiers des ESN et l'évolution nécessaire de leur modèle d'affaires.
+Dashboard interactif présentant l'impact de l'IA sur les métiers des ESN et l'évolution nécessaire du modèle d'affaires.
 
-## Fonctionnalités
+## Architecture de l'application
 
-- Visualisation de l'impact de l'IA sur différents métiers des ESN
-- Benchmarks économiques et évolution des budgets IT face à l'IA
-- Analyse détaillée de l'impact sur les architectes
-- Stratégies d'adaptation recommandées
-- Comparaison de productivité entre l'IA et le développement humain
+Cette application est construite avec React et utilise les technologies suivantes :
 
-## Structure du projet
+- **React** : Bibliothèque JavaScript pour construire des interfaces utilisateur
+- **React Router** : Gestion des routes et de la navigation
+- **Tailwind CSS** : Framework CSS utilitaire pour le style
+- **Recharts** : Bibliothèque de visualisation de données pour React
+- **Axios** : Client HTTP pour effectuer des requêtes API
 
-Le projet est structuré comme suit :
+L'application est organisée selon les principes suivants :
 
-```
-/
-├── public/
-│   ├── data/         # Fichiers JSON externalisés
-│   │   ├── app-config.json
-│   │   ├── charts-config.json
-│   │   ├── dashboard-data.json
-│   │   ├── error-messages.json
-│   │   ├── nav-config.json
-│   │   ├── ui-config.json
-│   │   └── ui-texts.json
-│   └── index.html
-├── src/
-│   ├── components/   # Composants réutilisables
-│   ├── data/         # Fichiers de données (fallback)
-│   ├── pages/        # Pages de l'application
-│   ├── services/     # Services d'accès aux données
-│   └── App.js        # Point d'entrée de l'application
-└── scripts/
-    └── generateJsonData.js  # Script de génération des fichiers JSON
-```
+1. **Composants réutilisables** : Dans le dossier `src/components`
+2. **Pages** : Dans le dossier `src/pages`
+3. **Services** : Dans le dossier `src/services` (pour les appels API et la logique métier)
+4. **Données** : Dans le dossier `src/data` (pour les données statiques ou simulées)
 
-## Architecture des données
+## Documentation
 
-L'application utilise une architecture de données externalisées pour faciliter la maintenance et les mises à jour. Toutes les données sont chargées dynamiquement à partir des fichiers JSON dans le dossier `public/data/`.
+- [Documentation des tests](./docs/testing/index.md) - Guide complet sur les tests automatisés
 
-- **Configuration de l'interface** : `ui-config.json` et `ui-texts.json`
-- **Configuration de navigation** : `nav-config.json`
-- **Données spécifiques aux pages** : `dashboard-data.json`, etc.
-- **Messages d'erreur** : `error-messages.json`
-- **Configuration des graphiques** : `charts-config.json`
+## Gestion des données
 
-En cas d'échec de chargement des fichiers JSON, l'application dispose d'un mécanisme de fallback sur les données en dur définies dans le dossier `src/data/`.
+Les données sont gérées de plusieurs façons :
 
-## Génération des fichiers JSON
+1. **Données statiques** : Importées directement depuis les fichiers JSON dans `src/data`
+2. **Données simulées** : Générées dynamiquement avec le script `scripts/generateJsonData.js`
+3. **Données d'API** : Récupérées via les services dans `src/services`
 
-Pour générer ou mettre à jour les fichiers JSON à partir des données en dur :
+## Installation et démarrage
 
 ```bash
+# Installation des dépendances
+npm install
+
+# Démarrage de l'application en mode développement
+npm start
+
+# Construction pour la production
+npm run build
+
+# Exécution des tests
+npm test
+
+# Génération des données de test
 npm run generate-json
 ```
 
-Ce script analyse le code source pour extraire les textes d'interface, les configurations et les données, puis génère les fichiers JSON correspondants dans le dossier `public/data/`.
+## Structure des dossiers
 
-## Extension des fonctionnalités
-
-Pour ajouter une nouvelle page ou fonctionnalité :
-
-1. Créer le composant de page correspondant dans `src/pages/`
-2. Ajouter les textes et configurations dans les fichiers JSON appropriés
-3. Ajouter la route dans `app-config.json`
-4. Mettre à jour le service de données pour charger les nouvelles données
-
-## Développement
-
-### Prérequis
-
-- Node.js 14+
-- npm ou yarn
-
-### Installation
-
-```bash
-# Cloner le dépôt
-git clone https://github.com/kbekouchi/impact-ia-esn-dashboard.git
-cd impact-ia-esn-dashboard
-
-# Installer les dépendances
-npm install
-
-# Lancer l'application en mode développement
-npm start
+```
+impact-ia-esn-dashboard/
+├── public/               # Fichiers statiques et index.html
+├── src/                  # Code source
+│   ├── components/       # Composants React réutilisables
+│   ├── data/             # Données statiques et mocks
+│   ├── pages/            # Composants de page
+│   ├── services/         # Services pour les appels API
+│   ├── utils/            # Fonctions utilitaires
+│   ├── App.js            # Composant principal
+│   ├── index.js          # Point d'entrée
+│   └── setupTests.js     # Configuration des tests
+├── scripts/              # Scripts utilitaires
+└── package.json          # Dépendances et scripts npm
 ```
 
-L'application sera disponible à l'adresse [http://localhost:3000](http://localhost:3000).
+## Contribution
+
+Toute contribution est la bienvenue. Veuillez ouvrir une issue pour discuter des modifications importantes avant de soumettre une pull request.

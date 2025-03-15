@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import InfoCard from '../components/InfoCard';
 import StatCard from '../components/StatCard';
+import StateDisplay from '../components/StateDisplay';
 // Importation du service de données au lieu des données directement
 import {
   getMetiersEtpComparaison,
@@ -14,18 +15,42 @@ import {
 
 const MetiersTransformation = () => {
   const [selectedMetier, setSelectedMetier] = useState('developpeur');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [data, setData] = useState({
+    etpComparaison: [],
+    metiersDetails: {},
+    tendancesTransversales: {}
+  });
   
-  // Récupération des données via le service
-  const etpComparaison = getMetiersEtpComparaison();
-  const metiersDetails = {
-    developpeur: getDeveloppeurData(),
-    businessAnalyst: getBusinessAnalystData(),
-    architecte: getArchitecteData(),
-    testeur: getTesteurData()
-  };
-  const tendancesTransversales = getTendancesTransversales();
-  
-  const metierInfo = metiersDetails[selectedMetier];
+  useEffect(() => {
+    try {
+      setLoading(true);
+      
+      // Récupération des données via le service
+      const etpComparaison = getMetiersEtpComparaison();
+      const metiersDetails = {
+        developpeur: getDeveloppeurData(),
+        businessAnalyst: getBusinessAnalystData(),
+        architecte: getArchitecteData(),
+        testeur: getTesteurData()
+      };
+      const tendancesTransversales = getTendancesTransversales();
+      
+      setData({
+        etpComparaison,
+        metiersDetails,
+        tendancesTransversales
+      });
+      
+      setError(false);
+    } catch (err) {
+      console.error("Erreur lors du chargement des données:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   // Données pour les courbes
   const colors = {
@@ -53,13 +78,48 @@ const MetiersTransformation = () => {
           <p className="text-blue-600">ETP avant IA: {formatNumber(payload[0].value)}</p>
           <p className="text-green-600">ETP après IA: {formatNumber(payload[1].value)}</p>
           <p className="text-gray-700 font-bold">
-            Réduction: {etpComparaison.find(item => item.name === label)?.reduction}
+            Réduction: {data.etpComparaison.find(item => item.name === label)?.reduction}
           </p>
         </div>
       );
     }
     return null;
   };
+
+  // Gestion du rechargement de la page en cas d'erreur
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
+  // Rendu pendant le chargement
+  if (loading) {
+    return <StateDisplay type="loading" theme="default" message="Chargement des données métiers..." />;
+  }
+
+  // Rendu en cas d'erreur
+  if (error) {
+    return (
+      <StateDisplay 
+        type="error" 
+        theme="card"
+        message="Impossible de charger les données de transformation métiers."
+        onAction={handleRetry}
+      />
+    );
+  }
+
+  // Vérification si les données sont vides
+  if (!data.etpComparaison || data.etpComparaison.length === 0) {
+    return (
+      <StateDisplay 
+        type="empty" 
+        theme="default" 
+        message="Aucune donnée disponible sur la transformation des métiers."
+      />
+    );
+  }
+
+  const metierInfo = data.metiersDetails[selectedMetier];
 
   return (
     <div className="space-y-8">
@@ -75,7 +135,7 @@ const MetiersTransformation = () => {
       <InfoCard title="Évolution des ETP par métier">
         <ResponsiveContainer width="100%" height={450}>
           <BarChart 
-            data={etpComparaison} 
+            data={data.etpComparaison} 
             layout="vertical"
             margin={{ left: 200, right: 40, top: 30, bottom: 30 }}
           >
@@ -170,18 +230,26 @@ const MetiersTransformation = () => {
         <div className="md:col-span-2">
           <div className="grid grid-cols-1 gap-6">
             <InfoCard title="Transformations actuelles">
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                {metierInfo.transformations.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
+              {metierInfo.transformations && metierInfo.transformations.length > 0 ? (
+                <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                  {metierInfo.transformations.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <StateDisplay type="empty" theme="minimal" message="Aucune transformation listée" />
+              )}
             </InfoCard>
             <InfoCard title="Projections à 5 ans">
-              <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                {metierInfo.projections.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
+              {metierInfo.projections && metierInfo.projections.length > 0 ? (
+                <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                  {metierInfo.projections.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <StateDisplay type="empty" theme="minimal" message="Aucune projection disponible" />
+              )}
             </InfoCard>
           </div>
         </div>
@@ -192,25 +260,37 @@ const MetiersTransformation = () => {
         <h2 className="text-2xl font-bold mb-6">Tendances transversales à tous les métiers</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard title="Compétences émergentes essentielles" bgColor="blue">
-            <ul className="list-disc pl-5 space-y-2 text-gray-700">
-              {tendancesTransversales.competences.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            {data.tendancesTransversales.competences && data.tendancesTransversales.competences.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                {data.tendancesTransversales.competences.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <StateDisplay type="empty" theme="minimal" message="Aucune compétence émergente listée" />
+            )}
           </InfoCard>
           <InfoCard title="Transformation des équipes" bgColor="purple">
-            <ul className="list-disc pl-5 space-y-2 text-gray-700">
-              {tendancesTransversales.equipes.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            {data.tendancesTransversales.equipes && data.tendancesTransversales.equipes.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                {data.tendancesTransversales.equipes.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <StateDisplay type="empty" theme="minimal" message="Aucune transformation d'équipe listée" />
+            )}
           </InfoCard>
           <InfoCard title="Défis de la transition" bgColor="yellow">
-            <ul className="list-disc pl-5 space-y-2 text-gray-700">
-              {tendancesTransversales.defis.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            {data.tendancesTransversales.defis && data.tendancesTransversales.defis.length > 0 ? (
+              <ul className="list-disc pl-5 space-y-2 text-gray-700">
+                {data.tendancesTransversales.defis.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <StateDisplay type="empty" theme="minimal" message="Aucun défi listé" />
+            )}
           </InfoCard>
         </div>
       </div>

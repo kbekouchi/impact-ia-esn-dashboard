@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList } from 'recharts';
 import StatCard from '../components/StatCard';
 import InfoCard from '../components/InfoCard';
+import StateDisplay from '../components/StateDisplay';
 import { getUiTexts, getDashboardData, getChartsConfig } from '../services/dataService';
-import { FaExclamationTriangle } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [data, setData] = useState({
     stats: {
       reductionEtp: { value: 63, unit: '%', description: 'Réduction moyenne des effectifs sur les métiers impactés', color: 'red' },
-      productiviteDev: { value: 55, unit: '%', description: 'Gain de productivité des développeurs avec l\'IA', color: 'green', prefix: '+' },
+      productiviteDev: { value: 55, unit: '%', description: 'Gain de productivité des développeurs avec l\\'IA', color: 'green', prefix: '+' },
       budgetsIa: { value: 81, unit: '%', description: 'Entreprises augmentant leur budget IA', color: 'blue', prefix: '+' },
-      requalification: { value: 80, unit: '%', description: 'Effectifs à requalifier d\'ici 2027', color: 'purple' }
+      requalification: { value: 80, unit: '%', description: 'Effectifs à requalifier d\\'ici 2027', color: 'purple' }
     },
     etpComparaison: [],
     budgetData: [],
@@ -99,35 +99,30 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  // Gestion du rechargement de la page en cas d'erreur
+  const handleRetry = () => {
+    window.location.reload();
+  };
+
   // Rendu pendant le chargement
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p>Chargement du dashboard...</p>
-        </div>
-      </div>
-    );
+    return <StateDisplay type="loading" theme="default" />;
   }
 
   // Rendu en cas d'erreur
   if (error) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center text-red-600">
-          <FaExclamationTriangle className="text-4xl mx-auto mb-4" />
-          <h2 className="text-xl font-bold mb-2">Erreur de chargement</h2>
-          <p>Impossible de charger les données du dashboard.</p>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Réessayer
-          </button>
-        </div>
-      </div>
+      <StateDisplay 
+        type="error" 
+        theme="card"
+        onAction={handleRetry}
+      />
     );
+  }
+
+  // Vérification si les données sont vides
+  if (!data.etpComparaison || data.etpComparaison.length === 0) {
+    return <StateDisplay type="empty" theme="default" />;
   }
 
   // Préparer les valeurs des StatCards
@@ -216,39 +211,43 @@ const Dashboard = () => {
         </InfoCard>
 
         <InfoCard title={texts.components.charts.budgetsTitle}>
-          <div style={{ height: chartsConfig.budgetChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart 
-                data={data.budgetData}
-                margin={{ 
-                  left: 0, 
-                  right: 5, 
-                  top: 10, 
-                  bottom: 10,
-                  ...chartsConfig.budgetChart?.margin 
-                }}
-              >
-                <CartesianGrid strokeDasharray={chartsConfig.budgetChart?.stroke || "3 3"} />
-                <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                <YAxis 
-                  domain={chartsConfig.budgetChart?.domain || [0, 40]} 
-                  tick={{ fontSize: 12 }} 
-                />
-                <Tooltip />
-                <Legend height={chartsConfig.budgetChart?.legendHeight || 25} wrapperStyle={{ paddingTop: 5 }} />
-                <Bar 
-                  dataKey="avant" 
-                  name={texts.components.charts.budgetAvant || "Avant IA (%)"} 
-                  fill={chartsConfig.budgetChart?.bars?.[0]?.fill || "#8884d8"} 
-                />
-                <Bar 
-                  dataKey="apres" 
-                  name={texts.components.charts.budgetApres || "Après IA (%)"} 
-                  fill={chartsConfig.budgetChart?.bars?.[1]?.fill || "#82ca9d"} 
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          {data.budgetData && data.budgetData.length > 0 ? (
+            <div style={{ height: chartsConfig.budgetChart?.height || '480px', width: '100%', padding: '0', margin: '0' }} className="w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart 
+                  data={data.budgetData}
+                  margin={{ 
+                    left: 0, 
+                    right: 5, 
+                    top: 10, 
+                    bottom: 10,
+                    ...chartsConfig.budgetChart?.margin 
+                  }}
+                >
+                  <CartesianGrid strokeDasharray={chartsConfig.budgetChart?.stroke || "3 3"} />
+                  <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                  <YAxis 
+                    domain={chartsConfig.budgetChart?.domain || [0, 40]} 
+                    tick={{ fontSize: 12 }} 
+                  />
+                  <Tooltip />
+                  <Legend height={chartsConfig.budgetChart?.legendHeight || 25} wrapperStyle={{ paddingTop: 5 }} />
+                  <Bar 
+                    dataKey="avant" 
+                    name={texts.components.charts.budgetAvant || "Avant IA (%)"} 
+                    fill={chartsConfig.budgetChart?.bars?.[0]?.fill || "#8884d8"} 
+                  />
+                  <Bar 
+                    dataKey="apres" 
+                    name={texts.components.charts.budgetApres || "Après IA (%)"} 
+                    fill={chartsConfig.budgetChart?.bars?.[1]?.fill || "#82ca9d"} 
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <StateDisplay type="empty" theme="minimal" />
+          )}
         </InfoCard>
       </div>
 
@@ -286,7 +285,7 @@ const Dashboard = () => {
       )}
 
       {/* Sections principales - Accès rapide */}
-      {data.quickLinks && data.quickLinks.length > 0 && (
+      {data.quickLinks && data.quickLinks.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {data.quickLinks.map((link, index) => (
             <InfoCard key={index} title={link.title} bgColor={link.bgColor}>
@@ -304,6 +303,8 @@ const Dashboard = () => {
             </InfoCard>
           ))}
         </div>
+      ) : (
+        <StateDisplay type="empty" theme="minimal" message="Aucun lien rapide disponible" />
       )}
 
       {/* Productivité IA vs humain */}

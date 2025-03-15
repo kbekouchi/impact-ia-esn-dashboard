@@ -85,3 +85,98 @@ async function generateNavConfig() {
     console.error('Erreur lors de la génération de nav-config.json:', error);
   }
 }
+
+// Génération des données UI des pages à partir des fichiers de pages
+async function generateUiTexts() {
+  try {
+    const pagesDir = path.join(__dirname, '../src/pages');
+    const pageFiles = fs.readdirSync(pagesDir);
+    
+    const uiTexts = {
+      pages: {},
+      components: {
+        tooltips: {},
+        errors: {
+          dataLoad: "Une erreur est survenue lors du chargement des données.",
+          retry: "Réessayer",
+          noData: "Aucune donnée disponible."
+        },
+        statCards: {},
+        charts: {}
+      }
+    };
+    
+    for (const pageFile of pageFiles) {
+      if (!pageFile.endsWith('.js')) continue;
+      
+      const pageName = pageFile.replace('.js', '');
+      const pagePath = path.join(pagesDir, pageFile);
+      const pageContent = fs.readFileSync(pagePath, 'utf8');
+      
+      // Extraction du titre et de la description
+      const titleMatch = pageContent.match(/<h1[^>]*>(.*?)<\/h1>/);
+      const descriptionMatch = pageContent.match(/<p[^>]*class="[^"]*text-gray-600[^"]*"[^>]*>(.*?)<\/p>/);
+      
+      uiTexts.pages[pageName.charAt(0).toLowerCase() + pageName.slice(1)] = {
+        title: titleMatch ? titleMatch[1].trim() : pageName,
+        description: descriptionMatch ? descriptionMatch[1].trim() : ''
+      };
+      
+      // Pour la page Dashboard, extraire plus d'informations
+      if (pageName === 'Dashboard') {
+        // Extraction des titres et descriptions des sections
+        const statCardsMatch = pageContent.match(/<StatCard[^>]*title="([^"]*)"[^>]*value="([^"]*)"[^>]*description="([^"]*)"[^>]*color="([^"]*)"/g);
+        
+        if (statCardsMatch) {
+          statCardsMatch.forEach(card => {
+            const titleMatch = card.match(/title="([^"]*)"/);
+            const descriptionMatch = card.match(/description="([^"]*)"/);
+            
+            if (titleMatch && descriptionMatch) {
+              const title = titleMatch[1];
+              const description = descriptionMatch[1];
+              const titleKey = title.toLowerCase().replace(/\s+/g, '') + 'Title';
+              const descriptionKey = title.toLowerCase().replace(/\s+/g, '') + 'Description';
+              
+              uiTexts.components.statCards[titleKey] = title;
+              uiTexts.components.statCards[descriptionKey] = description;
+            }
+          });
+        }
+        
+        // Extraction des titres des graphiques
+        const infoCardMatch = pageContent.match(/<InfoCard[^>]*title="([^"]*)"/g);
+        
+        if (infoCardMatch) {
+          infoCardMatch.forEach((card, index) => {
+            const titleMatch = card.match(/title="([^"]*)"/);
+            
+            if (titleMatch) {
+              const title = titleMatch[1];
+              
+              if (title.includes('ETP')) {
+                uiTexts.components.charts.etpTitle = title;
+              } else if (title.includes('budget')) {
+                uiTexts.components.charts.budgetsTitle = title;
+              }
+            }
+          });
+        }
+      }
+    }
+    
+    // Ajouter certaines valeurs en dur pour les charts
+    uiTexts.components.charts.etpAvant = "ETP avant IA";
+    uiTexts.components.charts.etpApres = "ETP après IA";
+    uiTexts.components.charts.budgetAvant = "Avant IA (%)";
+    uiTexts.components.charts.budgetApres = "Après IA (%)";
+    uiTexts.components.charts.reduction = "Réduction";
+    
+    // Ajouter des tooltips
+    uiTexts.components.tooltips.etpChart = "Équivalent Temps Plein - Mesure l'impact sur les ressources humaines";
+    
+    await writeJsonFile('ui-texts.json', uiTexts);
+  } catch (error) {
+    console.error('Erreur lors de la génération de ui-texts.json:', error);
+  }
+}

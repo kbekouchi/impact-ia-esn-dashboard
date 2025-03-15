@@ -145,6 +145,130 @@
     "buttons": {
       "primary": "inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors",
       "secondary": "inline-block px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-colors"
+    },
+    "stateDisplay": {
+      "themes": {
+        "default": {
+          "container": "flex flex-col items-center justify-center p-4 rounded-lg min-h-[200px]",
+          "iconWrapper": "mb-4",
+          "title": "text-lg font-bold mb-2",
+          "message": "text-base text-center mb-4",
+          "action": "inline-block px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+        },
+        "minimal": {
+          "container": "flex items-center justify-center p-2 rounded-md min-h-[100px]",
+          "iconWrapper": "mr-3",
+          "title": "text-base font-semibold",
+          "message": "text-sm",
+          "action": "text-sm text-blue-600 hover:text-blue-800 underline ml-2"
+        },
+        "card": {
+          "container": "bg-white shadow-md rounded-lg p-6 flex flex-col items-center justify-center min-h-[250px]",
+          "iconWrapper": "mb-6 p-3 rounded-full",
+          "title": "text-xl font-bold mb-3",
+          "message": "text-base text-center text-gray-600 mb-6",
+          "action": "px-5 py-2 rounded-md font-medium transition-colors"
+        }
+      },
+      "states": {
+        "loading": {
+          "default": {
+            "icon": "FaSpinner",
+            "iconClass": "animate-spin text-3xl text-blue-600",
+            "title": "Chargement en cours",
+            "message": "Veuillez patienter pendant le chargement des données.",
+            "containerClass": "bg-blue-50"
+          },
+          "minimal": {
+            "icon": "FaSpinner",
+            "iconClass": "animate-spin text-xl text-blue-600",
+            "message": "Chargement...",
+            "containerClass": "bg-blue-50"
+          },
+          "card": {
+            "icon": "FaSpinner",
+            "iconClass": "animate-spin text-4xl text-blue-600",
+            "title": "Chargement des données",
+            "message": "Les données sont en cours de chargement. Cela ne devrait prendre que quelques instants.",
+            "iconWrapperClass": "bg-blue-100",
+            "containerClass": "border border-blue-100"
+          }
+        },
+        "error": {
+          "default": {
+            "icon": "FaExclamationTriangle",
+            "iconClass": "text-3xl text-red-600",
+            "title": "Erreur",
+            "message": "Une erreur est survenue lors du chargement des données.",
+            "action": "Réessayer",
+            "containerClass": "bg-red-50"
+          },
+          "minimal": {
+            "icon": "FaExclamationTriangle",
+            "iconClass": "text-xl text-red-600",
+            "message": "Erreur de chargement",
+            "action": "Réessayer",
+            "containerClass": "bg-red-50"
+          },
+          "card": {
+            "icon": "FaExclamationTriangle",
+            "iconClass": "text-4xl text-red-600",
+            "title": "Erreur de chargement",
+            "message": "Nous n'avons pas pu charger les données demandées. Veuillez réessayer ou contacter le support si le problème persiste.",
+            "action": "Réessayer",
+            "iconWrapperClass": "bg-red-100",
+            "containerClass": "border border-red-100",
+            "actionClass": "bg-red-600 text-white hover:bg-red-700"
+          }
+        },
+        "empty": {
+          "default": {
+            "icon": "FaFolder",
+            "iconClass": "text-3xl text-gray-400",
+            "title": "Aucune donnée",
+            "message": "Aucune donnée disponible pour le moment.",
+            "containerClass": "bg-gray-50"
+          },
+          "minimal": {
+            "icon": "FaFolder",
+            "iconClass": "text-xl text-gray-400",
+            "message": "Aucune donnée",
+            "containerClass": "bg-gray-50"
+          },
+          "card": {
+            "icon": "FaFolder",
+            "iconClass": "text-4xl text-gray-400",
+            "title": "Aucune donnée disponible",
+            "message": "Il n'y a actuellement aucune donnée à afficher dans cette section.",
+            "iconWrapperClass": "bg-gray-100",
+            "containerClass": "border border-gray-100"
+          }
+        },
+        "success": {
+          "default": {
+            "icon": "FaCheckCircle",
+            "iconClass": "text-3xl text-green-600",
+            "title": "Succès",
+            "message": "L'opération a été effectuée avec succès.",
+            "containerClass": "bg-green-50"
+          },
+          "minimal": {
+            "icon": "FaCheckCircle",
+            "iconClass": "text-xl text-green-600",
+            "message": "Opération réussie",
+            "containerClass": "bg-green-50"
+          },
+          "card": {
+            "icon": "FaCheckCircle",
+            "iconClass": "text-4xl text-green-600",
+            "title": "Opération réussie",
+            "message": "L'opération a été effectuée avec succès.",
+            "iconWrapperClass": "bg-green-100",
+            "containerClass": "border border-green-100",
+            "actionClass": "bg-green-600 text-white hover:bg-green-700"
+          }
+        }
+      }
     }
   }
 }

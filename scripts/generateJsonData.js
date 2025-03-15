@@ -180,3 +180,169 @@ async function generateUiTexts() {
     console.error('Erreur lors de la génération de ui-texts.json:', error);
   }
 }
+
+// Génération des messages d'erreur
+async function generateErrorMessages() {
+  try {
+    const errorMessages = {
+      data: {
+        loading: "Chargement des données en cours...",
+        loadError: "Une erreur est survenue lors du chargement des données.",
+        retry: "Réessayer",
+        noData: "Aucune donnée disponible.",
+        dataOutdated: "Les données affichées pourraient ne pas être à jour."
+      },
+      auth: {
+        unauthorized: "Vous n'êtes pas autorisé à accéder à cette ressource.",
+        sessionExpired: "Votre session a expiré. Veuillez vous reconnecter.",
+        loginError: "Erreur lors de la connexion. Veuillez réessayer."
+      },
+      navigation: {
+        pageNotFound: "La page demandée n'existe pas.",
+        returnHome: "Retourner à l'accueil",
+        navigationError: "Erreur de navigation. Veuillez réessayer."
+      },
+      validation: {
+        required: "Ce champ est requis.",
+        invalidFormat: "Format invalide.",
+        numberRequired: "Ce champ doit contenir un nombre.",
+        minValue: "La valeur doit être supérieure à {min}.",
+        maxValue: "La valeur doit être inférieure à {max}.",
+        minLength: "Ce champ doit contenir au moins {min} caractères.",
+        maxLength: "Ce champ doit contenir au maximum {max} caractères."
+      },
+      actions: {
+        saveError: "Erreur lors de l'enregistrement. Veuillez réessayer.",
+        saveSuccess: "Enregistrement réussi.",
+        deleteError: "Erreur lors de la suppression. Veuillez réessayer.",
+        deleteSuccess: "Suppression réussie.",
+        updateError: "Erreur lors de la mise à jour. Veuillez réessayer.",
+        updateSuccess: "Mise à jour réussie.",
+        exportError: "Erreur lors de l'exportation. Veuillez réessayer.",
+        exportSuccess: "Exportation réussie."
+      },
+      connection: {
+        offline: "Vous êtes actuellement hors ligne. Certaines fonctionnalités peuvent ne pas être disponibles.",
+        reconnecting: "Tentative de reconnexion...",
+        connectionError: "Erreur de connexion au serveur.",
+        slowConnection: "Connexion lente détectée."
+      },
+      generic: {
+        error: "Une erreur est survenue.",
+        success: "Opération réussie.",
+        warning: "Attention!",
+        info: "Information",
+        confirm: "Êtes-vous sûr de vouloir effectuer cette action?"
+      },
+      statusCodes: {
+        400: "Requête incorrecte.",
+        401: "Non autorisé.",
+        403: "Accès refusé.",
+        404: "Ressource non trouvée.",
+        500: "Erreur interne du serveur.",
+        503: "Service temporairement indisponible."
+      }
+    };
+    
+    await writeJsonFile('error-messages.json', errorMessages);
+  } catch (error) {
+    console.error('Erreur lors de la génération de error-messages.json:', error);
+  }
+}
+
+// Génération de charts-config.json
+async function generateChartsConfig() {
+  try {
+    const chartsConfig = {
+      colors: {
+        primary: ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"],
+        blue: ["#bfdbfe", "#93c5fd", "#60a5fa", "#3b82f6", "#2563eb", "#1d4ed8"],
+        green: ["#bbf7d0", "#86efac", "#4ade80", "#22c55e", "#16a34a", "#15803d"],
+        red: ["#fecaca", "#fca5a5", "#f87171", "#ef4444", "#dc2626", "#b91c1c"],
+        purple: ["#e9d5ff", "#d8b4fe", "#c084fc", "#a855f7", "#9333ea", "#7e22ce"],
+        amber: ["#fef3c7", "#fde68a", "#fcd34d", "#fbbf24", "#f59e0b", "#d97706"],
+        gray: ["#f3f4f6", "#e5e7eb", "#d1d5db", "#9ca3af", "#6b7280", "#4b5563"]
+      },
+      etpComparisonChart: {
+        layout: "vertical",
+        height: 480,
+        margin: {
+          top: 10,
+          right: 30,
+          bottom: 10,
+          left: 0
+        },
+        domain: [0, 7],
+        yAxisWidth: 105,
+        stroke: "3 3",
+        bars: [
+          {
+            dataKey: "avant",
+            name: "ETP avant IA",
+            fill: "#8884d8",
+            labelPosition: "right"
+          },
+          {
+            dataKey: "apres",
+            name: "ETP après IA",
+            fill: "#82ca9d",
+            labelPosition: "right"
+          }
+        ]
+      },
+      budgetChart: {
+        height: 480,
+        margin: {
+          top: 10,
+          right: 5,
+          bottom: 10,
+          left: 0
+        },
+        domain: [0, 40],
+        stroke: "3 3",
+        legendHeight: 25,
+        bars: [
+          {
+            dataKey: "avant",
+            name: "Avant IA (%)",
+            fill: "#8884d8"
+          },
+          {
+            dataKey: "apres",
+            name: "Après IA (%)",
+            fill: "#82ca9d"
+          }
+        ]
+      },
+      productivityChart: {
+        height: 400,
+        margin: {
+          top: 10,
+          right: 30,
+          bottom: 30,
+          left: 10
+        },
+        domain: [0, 100],
+        stroke: "3 3",
+        lines: [
+          {
+            dataKey: "avant",
+            name: "Productivité avant IA",
+            stroke: "#8884d8",
+            strokeWidth: 2
+          },
+          {
+            dataKey: "apres",
+            name: "Productivité avec IA",
+            stroke: "#82ca9d",
+            strokeWidth: 2
+          }
+        ]
+      }
+    };
+    
+    await writeJsonFile('charts-config.json', chartsConfig);
+  } catch (error) {
+    console.error('Erreur lors de la génération de charts-config.json:', error);
+  }
+}

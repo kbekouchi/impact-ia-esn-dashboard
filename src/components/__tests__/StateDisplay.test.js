@@ -86,11 +86,15 @@ describe('StateDisplay Component', () => {
     dataService.getUiConfig.mockResolvedValue(mockConfig);
   });
 
-  // Wrapping les tests avec act() pour gérer les mises à jour d'état React
+  // Pour le premier test, nous bloquons délibérément la résolution de la promesse getUiConfig
+  // afin de pouvoir vérifier l'état de chargement initial
   it('affiche un état de chargement initial pendant le chargement de la configuration', async () => {
-    await act(async () => {
-      render(<StateDisplay type="loading" />);
-    });
+    // Bloquer temporairement la résolution de la promesse
+    dataService.getUiConfig.mockImplementation(() => new Promise(() => {}));
+    
+    render(<StateDisplay type="loading" />);
+    
+    // Vérifier que l'état de chargement initial est affiché
     expect(screen.getByText('Initialisation...')).toBeInTheDocument();
   });
 

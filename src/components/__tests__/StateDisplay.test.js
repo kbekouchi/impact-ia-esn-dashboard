@@ -181,7 +181,8 @@ describe('StateDisplay Component', () => {
     await waitFor(() => {
       // Les valeurs fallback sont différentes des valeurs de test
       expect(screen.queryByText('Chargement test')).not.toBeInTheDocument();
-      expect(screen.getByText(/chargement/i)).toBeInTheDocument();
+      // Utilisons le titre spécifique plutôt qu'une expression régulière
+      expect(screen.getByText('Chargement en cours')).toBeInTheDocument();
     });
   });
 });

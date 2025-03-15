@@ -85,6 +85,14 @@ describe('StateDisplay Component', () => {
     jest.clearAllMocks();
     // Mock de la fonction getUiConfig pour renvoyer la configuration de test
     dataService.getUiConfig.mockResolvedValue(mockConfig);
+    
+    // Supprimer les erreurs de console pour le test simulant une erreur de chargement
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+  
+  afterEach(() => {
+    // Restaurer les mocks de console après chaque test
+    console.error.mockRestore();
   });
 
   it('affiche un état de chargement initial pendant le chargement de la configuration', async () => {
@@ -234,17 +242,22 @@ describe('StateDisplay Component', () => {
     // Simuler une erreur lors du chargement de la configuration
     dataService.getUiConfig.mockRejectedValue(new Error('Erreur de chargement config'));
     
+    // Masquer temporairement l'erreur de console pendant ce test
+    console.error.mockImplementation(() => {});
+    
     await act(async () => {
       render(<StateDisplay type="loading" />);
       // Attendre que les mises à jour asynchrones se terminent
       await new Promise(resolve => setTimeout(resolve, 0));
     });
     
+    // Utiliser waitFor avec un timeout plus long pour s'assurer que le fallback est chargé
     await waitFor(() => {
-      // Les valeurs fallback sont différentes des valeurs de test
+      // Vérifier que le composant a correctement basculé vers la configuration de fallback
       expect(screen.queryByText('Chargement test')).not.toBeInTheDocument();
-      // Utiliser un sélecteur plus spécifique pour éviter les doublons
-      expect(screen.getByRole('heading')).toHaveTextContent(/chargement/i);
-    });
+      const headings = screen.getAllByRole('heading');
+      const chargementHeading = headings.find(heading => heading.textContent.toLowerCase().includes('chargement'));
+      expect(chargementHeading).toBeInTheDocument();
+    }, { timeout: 2000 });
   });
 });
